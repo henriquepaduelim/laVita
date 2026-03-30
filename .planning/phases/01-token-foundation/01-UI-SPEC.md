@@ -58,7 +58,13 @@ No typography changes in this phase. The existing scale is locked and inherited.
 | Body | 16px (Source Sans 3) | 400 | 1.5 |
 | Label / eyebrow | 12.5px (0.78rem, Lexend) | 600 | 1.2 |
 | Heading | 20px | 600 | 1.2 |
-| Display | 28px (Lexend) | 700 | 1.15 |
+| Display | 28px (Lexend) | 600 | 1.15 |
+
+Weights used in this phase: 400 (body) and 600 (label/eyebrow, heading, display).
+Size difference between heading (20px) and display (28px) provides sufficient
+visual hierarchy without a third weight. Note: the Lexend Google Fonts import
+includes the 700 weight axis value, but this phase only uses 400 and 600 — the
+700 axis value must not be applied to any element.
 
 Source: `src/index.css` `.eyebrow` rule; project-wide Tailwind class usage. No
 changes are made to typography in this phase — documented for executor awareness
