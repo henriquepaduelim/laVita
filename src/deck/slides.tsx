@@ -54,7 +54,7 @@ function buildCoverAgendaItems(slides: DeckSlideDefinition[]) {
 }
 
 function CoverSlide({ index, total }: { index: number; total: number }) {
-  const { overview } = reportData;
+  const { overview, metadata } = reportData;
   const agendaItems = buildCoverAgendaItems(deckSlides);
 
   return (
@@ -78,28 +78,55 @@ function CoverSlide({ index, total }: { index: number; total: number }) {
         <div className="grid min-h-0 flex-1 gap-4 xl:grid-cols-[1.04fr_0.96fr]">
           <div className="flex h-full min-h-0 flex-col rounded-[2rem] border border-[var(--border-strong)] bg-transparent p-6 shadow-none lg:p-7">
             <div>
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                <p className="font-display text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-                Case Analista Comercial
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="font-display text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
+                    Case - Analista Comercial
+                  </p>
+                  <p className="mt-1 text-[0.72rem] uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+                    Autor: {metadata.author}
+                  </p>
+                </div>
+                <p className="text-[0.72rem] uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+                  2024 vs. 2025
                 </p>
               </div>
               <h1 className="font-display mt-5 max-w-[14ch] text-[2.15rem] font-semibold leading-[1.02] tracking-tight text-[var(--ink)] lg:text-[2.55rem]">
-              Crescimento relevante em 2025, puxado por volume e concentrado em poucas redes.
+                Crescimento relevante em 2025, puxado por volume e concentrado em poucas redes.
               </h1>
             </div>
 
-            <div className="mt-auto flex flex-wrap gap-3 pt-8">
-              <div className="rounded-full border border-[var(--border)] bg-white/60 px-4 py-2.5">
-                <p className="text-[0.72rem] uppercase tracking-[0.16em] text-[var(--ink-soft)]">Receita 2025</p>
-                <p className="font-display mt-1 text-xl font-semibold text-[var(--ink)]">
-                  {formatCurrency(overview.revenue.value2025)}
+            <div className="mt-auto flex flex-col gap-4 pt-6">
+              <div className="border-t border-[var(--border)] pt-4">
+                <p className="text-[0.84rem] leading-6 text-[var(--ink-soft)]">
+                  Análise comparativa de {formatNumber(overview.activeNetworksCount)} redes com foco em concentração de receita, perfil de clientes, dimensão por categoria e remuneração variável.
                 </p>
               </div>
-              <div className="rounded-full border border-[var(--border)] bg-white/60 px-4 py-2.5">
-                <p className="text-[0.72rem] uppercase tracking-[0.16em] text-[var(--ink-soft)]">Variação YoY</p>
-                <p className="font-display mt-1 text-xl font-semibold text-[var(--ink)]">
-                  {formatSignedPercent(overview.revenue.variationPct)}
-                </p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-[1.2rem] border border-[var(--border)] bg-white/60 px-4 py-3">
+                  <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--ink-soft)]">Receita 2025</p>
+                  <p className="font-display mt-1.5 text-[1.3rem] font-semibold leading-none text-[var(--ink)]">
+                    {formatCurrency(overview.revenue.value2025)}
+                  </p>
+                </div>
+                <div className="rounded-[1.2rem] border border-[var(--border)] bg-white/60 px-4 py-3">
+                  <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--ink-soft)]">Crescimento YoY</p>
+                  <p className="font-display mt-1.5 text-[1.3rem] font-semibold leading-none text-[var(--ink)]">
+                    {formatSignedPercent(overview.revenue.variationPct)}
+                  </p>
+                </div>
+                <div className="rounded-[1.2rem] border border-[var(--border)] bg-white/60 px-4 py-3">
+                  <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--ink-soft)]">Crescimento de volume</p>
+                  <p className="font-display mt-1.5 text-[1.3rem] font-semibold leading-none text-[var(--ink)]">
+                    {formatSignedPercent(overview.volume.variationPct)}
+                  </p>
+                </div>
+                <div className="rounded-[1.2rem] border border-[var(--border)] bg-white/60 px-4 py-3">
+                  <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--ink-soft)]">Redes analisadas</p>
+                  <p className="font-display mt-1.5 text-[1.3rem] font-semibold leading-none text-[var(--ink)]">
+                    {formatNumber(overview.activeNetworksCount)}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -786,6 +813,7 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
     <SlideFrame
       eyebrow="Remuneração Variável"
       title="Proposta para crescimento com disciplina comercial."
+      summary="Bônus: 40% volume comparável, 30% preço, 20% sortimento, 10% mix."
       index={index}
       total={total}
     >

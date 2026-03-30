@@ -173,6 +173,7 @@ export const reportData = {
     title: 'Relatório Final',
     subtitle: 'Case - Analista Comercial',
     company: 'La Vita Alimentos',
+    author: 'Henrique Padueli Machado',
     requestedBlocks: [
       'Concentração de faturamento (Curva ABC / Pareto)',
       'Análise comparativa por cliente',
