@@ -1,0 +1,81 @@
+[
+  {
+    "name": "slide 2 metodologia",
+    "usage": "Tabela principal do slide 2.",
+    "files": {
+      "svg": "presentation_assets/tables/s02_methodology_table.svg",
+      "png": "presentation_assets/tables/s02_methodology_table.png",
+      "csv": "presentation_assets/source_data/s02_methodology_table.csv"
+    }
+  },
+  {
+    "name": "slide 2 qualidade",
+    "usage": "Dados-base para os cards de qualidade do slide 2.",
+    "files": {
+      "csv": "presentation_assets/source_data/s02_quality_snapshot.csv"
+    }
+  },
+  {
+    "name": "slide 3 pareto",
+    "usage": "Grafico principal do slide 3.",
+    "files": {
+      "svg": "presentation_assets/charts/s03_pareto_chart.svg",
+      "png": "presentation_assets/charts/s03_pareto_chart.png",
+      "csv": "presentation_assets/source_data/s03_pareto_chart.csv"
+    }
+  },
+  {
+    "name": "slide 5 scatter",
+    "usage": "Grafico principal do slide 5.",
+    "files": {
+      "svg": "presentation_assets/charts/s05_price_vs_growth.svg",
+      "png": "presentation_assets/charts/s05_price_vs_growth.png",
+      "csv": "presentation_assets/source_data/s05_price_vs_growth.csv"
+    }
+  },
+  {
+    "name": "slide 6 receita categoria",
+    "usage": "Grafico 1 do slide 6.",
+    "files": {
+      "svg": "presentation_assets/charts/s06_category_revenue.svg",
+      "png": "presentation_assets/charts/s06_category_revenue.png",
+      "csv": "presentation_assets/source_data/s06_category_revenue.csv"
+    }
+  },
+  {
+    "name": "slide 6 crescimento categoria",
+    "usage": "Grafico 2 do slide 6.",
+    "files": {
+      "svg": "presentation_assets/charts/s06_category_growth.svg",
+      "png": "presentation_assets/charts/s06_category_growth.png",
+      "csv": "presentation_assets/source_data/s06_category_growth.csv"
+    }
+  },
+  {
+    "name": "slide 6 preco categoria",
+    "usage": "Grafico 3 do slide 6.",
+    "files": {
+      "svg": "presentation_assets/charts/s06_category_price.svg",
+      "png": "presentation_assets/charts/s06_category_price.png",
+      "csv": "presentation_assets/source_data/s06_category_price.csv"
+    }
+  },
+  {
+    "name": "slide 8 drivers",
+    "usage": "Grafico principal do slide 8.",
+    "files": {
+      "svg": "presentation_assets/charts/s08_drivers_diverging.svg",
+      "png": "presentation_assets/charts/s08_drivers_diverging.png",
+      "csv": "presentation_assets/source_data/s08_drivers_diverging.csv"
+    }
+  },
+  {
+    "name": "slide 8 impacto por categoria",
+    "usage": "Tabela da coluna direita do slide 8.",
+    "files": {
+      "svg": "presentation_assets/tables/s08_category_impact_table.svg",
+      "png": "presentation_assets/tables/s08_category_impact_table.png",
+      "csv": "presentation_assets/source_data/s08_category_impact_table.csv"
+    }
+  }
+]

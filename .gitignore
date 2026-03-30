@@ -1,0 +1,16 @@
+node_modules
+dist
+.DS_Store
+*.tsbuildinfo
+vite.config.d.ts
+
+.planning/
+.claude/
+.codex/
+.ipynb_checkpoints/
+.mplconfig/
+__pycache__/
+
+_slides_tmp/
+_tmp_test_plot.png
+_tmp_test_plot.svg

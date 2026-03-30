@@ -1,0 +1,8 @@
+Decisao,Criterio adotado,Justificativa
+Cliente,Rede (DS_REDE),analise acima da loja individual
+Loja,NM_REDUZIDO,menor granularidade disponivel
+Preco medio,Receita / Quantidade,evita vies da media simples
+Crescimento %,So redes comparaveis (2024 > 0),exclui distorcao de base zero
+Crescimento R$,Todas as redes com receita em 2025,mede impacto financeiro real
+Dimensao (E3),Categoria,join 100% confiavel
+Macro-regiao,Descartada,sem coluna de municipio para join

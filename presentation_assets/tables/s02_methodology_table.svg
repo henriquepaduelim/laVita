@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="911.52pt" height="349.92pt" viewBox="0 0 911.52 349.92" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-03-29T21:37:41.324989</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 349.92 
+L 911.52 349.92 
+L 911.52 -0 
+L 0 -0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 17.46 348.2208 
+L 894.06 348.2208 
+Q 916.56 348.2208 916.56 339.7608 
+L 916.56 10.1592 
+Q 916.56 1.6992 894.06 1.6992 
+L 17.46 1.6992 
+Q -5.04 1.6992 -5.04 10.1592 
+L -5.04 339.7608 
+Q -5.04 348.2208 17.46 348.2208 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #ffffff; stroke: #d1d5db; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 41.76 73.44 
+L 869.76 73.44 
+L 869.76 44.676 
+L 41.76 44.676 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #1b3a6b; stroke: #1b3a6b; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 41.76 105.588 
+L 869.76 105.588 
+L 869.76 73.44 
+L 41.76 73.44 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #f3f4f6; stroke: #d1d5db; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 41.76 137.736 
+L 869.76 137.736 
+L 869.76 105.588 
+L 41.76 105.588 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #ffffff; stroke: #d1d5db; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 41.76 169.884 
+L 869.76 169.884 
+L 869.76 137.736 
+L 41.76 137.736 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #f3f4f6; stroke: #d1d5db; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 41.76 202.032 
+L 869.76 202.032 
+L 869.76 169.884 
+L 41.76 169.884 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #ffffff; stroke: #d1d5db; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 41.76 234.18 
+L 869.76 234.18 
+L 869.76 202.032 
+L 41.76 202.032 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #f3f4f6; stroke: #d1d5db; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 41.76 266.328 
+L 869.76 266.328 
+L 869.76 234.18 
+L 41.76 234.18 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #ffffff; stroke: #d1d5db; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 41.76 298.476 
+L 869.76 298.476 
+L 869.76 266.328 
+L 41.76 266.328 
+z
+" clip-path="url(#pc1f572c5c0)" style="fill: #f3f4f6; stroke: #d1d5db; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="41.76" y="33.8005" transform="rotate(-0 41.76 33.8005)">Decisoes metodologicas</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="41.76" y="48.989406" transform="rotate(-0 41.76 48.989406)">Tabela pronta para o slide 2, com destaque visual nas escolhas criticas.</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #ffffff" x="52.56" y="61.817375" transform="rotate(-0 52.56 61.817375)">Decisao</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #ffffff" x="234.72" y="61.817375" transform="rotate(-0 234.72 61.817375)">Criterio adotado</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #048a81" x="491.4" y="61.817375" transform="rotate(-0 491.4 61.817375)">Justificativa</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="52.56" y="92.273375" transform="rotate(-0 52.56 92.273375)">Cliente</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #048a81" x="234.72" y="92.055703" transform="rotate(-0 234.72 92.055703)">Rede (DS_REDE)</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="491.4" y="92.052625" transform="rotate(-0 491.4 92.052625)">analise acima da loja individual</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="52.56" y="124.382312" transform="rotate(-0 52.56 124.382312)">Loja</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #048a81" x="234.72" y="124.11807" transform="rotate(-0 234.72 124.11807)">NM_REDUZIDO</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="491.4" y="124.200625" transform="rotate(-0 491.4 124.200625)">menor granularidade disponivel</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="52.56" y="156.569375" transform="rotate(-0 52.56 156.569375)">Preco medio</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #048a81" x="234.72" y="156.486594" transform="rotate(-0 234.72 156.486594)">Receita / Quantidade</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="491.4" y="156.348625" transform="rotate(-0 491.4 156.348625)">evita vies da media simples</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="52.56" y="188.717375" transform="rotate(-0 52.56 188.717375)">Crescimento %</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; fill: #048a81" transform="translate(234.72 183.203655)">So redes comparaveis (2024 &gt;</text>
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; fill: #048a81" transform="translate(234.72 194.065533)">0)</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="491.4" y="188.496625" transform="rotate(-0 491.4 188.496625)">exclui distorcao de base zero</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="52.56" y="220.865375" transform="rotate(-0 52.56 220.865375)">Crescimento R$</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; fill: #048a81" transform="translate(234.72 215.351655)">Todas as redes com receita</text>
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; fill: #048a81" transform="translate(234.72 226.213533)">em 2025</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="491.4" y="220.644625" transform="rotate(-0 491.4 220.644625)">mede impacto financeiro real</text>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="52.56" y="253.013375" transform="rotate(-0 52.56 253.013375)">Dimensao (E3)</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #048a81" x="234.72" y="252.892703" transform="rotate(-0 234.72 252.892703)">Categoria</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="491.4" y="252.792625" transform="rotate(-0 491.4 252.792625)">join 100% confiavel</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b3a6b" x="52.56" y="285.122313" transform="rotate(-0 52.56 285.122313)">Macro-regiao</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 9.7px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #c0392b" x="234.72" y="285.078594" transform="rotate(-0 234.72 285.078594)">Descartada</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #6b7280" x="491.4" y="284.940625" transform="rotate(-0 491.4 284.940625)">sem coluna de municipio para join</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc1f572c5c0">
+   <rect x="5.76" y="5.76" width="900" height="338.4"/>
+  </clipPath>
+ </defs>
+</svg>
