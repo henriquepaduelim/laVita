@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 type ChartCardProps = {
   title: string;
-  description: string;
+  description?: string;
   question?: string;
   children: ReactNode;
   className?: string;
@@ -27,10 +27,12 @@ export function ChartCard({
       <h3 className={`font-display ${compact ? 'text-[1.05rem]' : 'mt-3 text-2xl'} font-semibold tracking-tight text-[var(--ink)]`}>
         {title}
       </h3>
-      <p className={`mt-1.5 max-w-2xl ${compact ? 'text-[0.82rem] leading-5' : 'text-base leading-7'} text-[var(--ink-soft)]`}>
-        {description}
-      </p>
-      <div className={`chart-grid ${compact ? 'mt-3' : 'mt-6'}`}>{children}</div>
+      {description ? (
+        <p className={`mt-1.5 max-w-2xl ${compact ? 'text-[0.82rem] leading-5' : 'text-base leading-7'} text-[var(--ink-soft)]`}>
+          {description}
+        </p>
+      ) : null}
+      <div className={`chart-grid ${compact ? (description ? 'mt-3' : 'mt-2') : 'mt-6'}`}>{children}</div>
     </article>
   );
 }

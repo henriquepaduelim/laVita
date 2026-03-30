@@ -10,7 +10,7 @@ import {
   Line,
   ReferenceLine,
   ResponsiveContainer,
-  Tooltip,
+  Tooltip, 
   XAxis,
   YAxis,
 } from 'recharts';
@@ -142,57 +142,55 @@ function ParetoSlide({ index, total }: { index: number; total: number }) {
   return (
     <SlideFrame
       eyebrow="Concentração de Receita"
-      title="A receita de 2025 está concentrada em poucas redes."
-      summary="As 10 maiores contas respondem por 81,17% do faturamento. Esse grupo precisa de gestão prioritária e plano comercial dedicado."
+      title="Receita de 2025 concentrada em poucas redes."
+      summary="As 10 maiores contas respondem por 81,17% do faturamento."
       index={index}
       total={total}
     >
-      <div className="grid gap-4 xl:grid-cols-[0.7fr_1.3fr]">
-        <div className="grid gap-4 content-start">
-          <article className="panel rounded-[1.55rem] border border-[var(--border-strong)] bg-white/30 p-4 shadow-none">
-            <div className="flex items-end justify-between gap-3 border-b border-[var(--border)] pb-3">
-              <div>
-                <p className="font-display text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--brand)]">
-                  Contas A
-                </p>
-                <h3 className="font-display mt-1 text-[1.05rem] font-semibold tracking-tight text-[var(--ink)]">
-                  Redes que sustentam a concentração
-                </h3>
-              </div>
-              <p className="text-right text-[0.76rem] leading-4 text-[var(--ink-soft)]">
-                {overview.paretoClassACount} redes
-                <br />
-                {formatPercent(overview.paretoClassAShare)} da receita
+      <div className="grid gap-4 xl:grid-cols-[0.68fr_1.32fr]">
+        <div className="content-start">
+          <article className="panel rounded-[1.65rem] border border-[var(--border-strong)] bg-white/30 p-4 shadow-none">
+            <div className="rounded-[1rem] border border-[rgba(58,143,18,0.14)] bg-[rgba(58,143,18,0.06)] px-3 py-3">
+              <p className="mt-1.5 text-[0.95rem] leading-5 text-[var(--ink)]">
+                <strong className="font-semibold">{overview.paretoClassACount} redes concentram {formatPercent(overview.paretoClassAShare)}</strong> da receita de 2025 e exigem gestão comercial dedicada.
               </p>
             </div>
 
-            <div className="mt-2 divide-y divide-[var(--border)]">
-              {topPriorityNetworks.map((row, rowIndex) => (
-                <div key={row.network} className="grid grid-cols-[2rem_minmax(0,1fr)_4.5rem] items-center gap-3 py-2.5">
-                  <p className="font-display text-[0.95rem] font-semibold text-[var(--brand)]">
-                    {String(rowIndex + 1).padStart(2, '0')}
-                  </p>
-                  <p className="truncate font-display text-[0.92rem] font-medium text-[var(--ink)]">
-                    {row.network}
-                  </p>
-                  <p className="text-right text-[0.84rem] font-semibold text-[var(--ink-soft)]">
-                    {formatPercent(row.share)}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-3 overflow-hidden rounded-[1.1rem] border border-[var(--border)] bg-white/42">
+              <div className="grid grid-cols-[2rem_minmax(0,1fr)_4.5rem] gap-3 border-b border-[var(--border)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+                <p>Pos.</p>
+                <p>Rede</p>
+                <p className="text-right">Share</p>
+              </div>
+              <div className="divide-y divide-[var(--border)]">
+                {topPriorityNetworks.map((row, rowIndex) => (
+                  <div key={row.network} className="grid grid-cols-[2rem_minmax(0,1fr)_4.5rem] items-center gap-3 px-4 py-2.5">
+                    <p className="font-display text-[0.95rem] font-semibold text-[var(--brand)]">
+                      {String(rowIndex + 1).padStart(2, '0')}
+                    </p>
+                    <p className="truncate font-display text-[0.92rem] font-medium text-[var(--ink)]">
+                      {row.network}
+                    </p>
+                    <p className="text-right text-[0.84rem] font-semibold text-[var(--ink-soft)]">
+                      {formatPercent(row.share)}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <p className="mt-3 border-t border-[var(--border)] pt-3 text-[0.78rem] leading-5 text-[var(--ink-soft)]">
-              As cinco primeiras redes já representam <strong className="font-semibold text-[var(--ink)]">{formatPercent(topPriorityNetworks.reduce((sum, row) => sum + row.share, 0))}</strong> da receita de 2025.
-            </p>
+            <div className="mt-3 border-t border-[var(--border)] pt-3">
+              <p className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+                Implicação
+              </p>
+              <p className="mt-1.5 text-[0.9rem] leading-5 text-[var(--ink)]">
+                <strong className="font-semibold">Classe A é carteira estratégica.</strong> A cauda longa deve ser trabalhada para ganho de mix e cobertura.
+              </p>
+            </div>
           </article>
-          <KpiCard compact label="Receita consolidada" value={formatCompactCurrency(overview.revenue.value2025)} detail="Base usada na leitura do Pareto." tone="muted" />
-          <InsightBlock compact title="Mensagem principal" accent="teal">
-            <p><strong className="font-semibold text-[var(--ink)]">Classe A é carteira estratégica.</strong> A cauda longa é espaço para ganho de mix e cobertura.</p>
-          </InsightBlock>
         </div>
-        <ChartCard compact question="Onde a receita se concentra?" title="Curva ABC de faturamento" description="As barras mostram receita por rede; a linha mostra a participação acumulada no total de 2025.">
-          <div className="h-[20rem] xl:h-[24rem]">
+        <ChartCard compact title="Curva ABC de faturamento" description="Receita por rede e participação acumulada.">
+          <div className="h-[21rem] xl:h-[25rem]">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={pareto} margin={{ top: 14, right: 16, left: 8, bottom: 18 }}>
                 <CartesianGrid vertical={false} />
@@ -205,7 +203,7 @@ function ParetoSlide({ index, total }: { index: number; total: number }) {
                   labelFormatter={(label) => `Rede: ${label}`}
                 />
                 <Legend formatter={(value) => value === 'sales2025' ? 'Receita 2025' : 'Participação acumulada'} />
-                <ReferenceLine yAxisId="right" y={0.8} stroke={chartPalette.red} strokeDasharray="4 4" />
+                <ReferenceLine yAxisId="right" y={0.8} stroke={chartPalette.red} strokeDasharray="4 4" label={{ value: 'Limite Classe A — 80%', position: 'insideTopLeft', fontSize: 10, fill: chartPalette.red }} />
                 <Bar yAxisId="left" dataKey="sales2025" radius={[10, 10, 0, 0]}>
                   {pareto.map((entry) => <Cell key={entry.network} fill={entry.isClassA ? chartPalette.navy : chartPalette.slate} />)}
                 </Bar>
@@ -231,8 +229,8 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
   return (
     <SlideFrame
       eyebrow="Análise por Cliente"
-      title="O desempenho varia mais por perfil de rede do que por porte."
-      summary="Cada cliente combina volume, preço, sortimento e crescimento de maneira distinta. A comparação conjunta é o que torna a leitura útil."
+      title="Desempenho segue perfil, não porte."
+      summary="Volume, preço, sortimento e crescimento precisam ser lidos em conjunto."
       index={index}
       total={total}
     >
@@ -264,7 +262,7 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
         ]}
       />
       <div className="mt-5 grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
-        <ChartCard compact question="Preço mais alto acelera crescimento?" title="Preço médio x crescimento por rede" description="A dispersão compara preço médio e crescimento para mostrar que a correlação entre os dois é fraca.">
+        <ChartCard compact title="Preço médio x crescimento por rede" description="Correlação entre preço e crescimento.">
           <div className="h-[18rem] xl:h-[22rem]">
             <PriceGrowthScatterChart
               data={scatter}
@@ -274,19 +272,46 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
             />
           </div>
         </ChartCard>
-        <div className="grid gap-4 content-start">
-          <InsightBlock compact title="Maior crescimento %" accent="success">
-            <p><strong className="font-semibold text-[var(--ink)]">{references.mQualidade.network}</strong> avançou <strong className="font-semibold text-[var(--ink)]">{formatPercent(references.mQualidade.growthPct)}</strong>.</p>
-          </InsightBlock>
-          <InsightBlock compact title="Maior preço médio" accent="amber">
-            <p><strong className="font-semibold text-[var(--ink)]">{references.db.network}</strong> lidera com <strong className="font-semibold text-[var(--ink)]">{formatCurrency(references.db.price2025, 2)}</strong> por item.</p>
-          </InsightBlock>
-          <InsightBlock compact title="Correlação" accent="teal">
-            <p><strong className="font-semibold text-[var(--ink)]">Preço x crescimento</strong> registra correlação de <strong className="font-semibold text-[var(--ink)]">{formatRatio(overview.scatterCorrelation, 4)}</strong>.</p>
-          </InsightBlock>
-          <InsightBlock compact title="Leitura principal" accent="brand">
-            <p><strong className="font-semibold text-[var(--ink)]">Preço não explica sozinho o avanço.</strong> A rede que mais cresce não é a de maior preço médio.</p>
-          </InsightBlock>
+        <div className="content-start border-t border-[var(--border)] pt-4">
+          <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+            Pontos-chave
+          </p>
+          <ul className="mt-4 space-y-4 text-[0.98rem] leading-6 text-[var(--ink)]">
+            <li className="flex gap-3">
+              <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--success)]" />
+              <p>
+                <strong className="font-semibold">{references.mQualidade.network}</strong> registrou o maior crescimento percentual, com
+                {' '}
+                <strong className="font-semibold">{formatPercent(references.mQualidade.growthPct)}</strong>.
+              </p>
+            </li>
+            <li className="flex gap-3">
+              <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--warning)]" />
+              <p>
+                <strong className="font-semibold">{references.db.network}</strong> tem o maior preço médio, em
+                {' '}
+                <strong className="font-semibold">{formatCurrency(references.db.price2025, 2)}</strong>
+                {' '}
+                por item.
+              </p>
+            </li>
+            <li className="flex gap-3">
+              <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]" />
+              <p>
+                A correlação entre preço e crescimento é
+                {' '}
+                <strong className="font-semibold">{formatRatio(overview.scatterCorrelation, 2)}</strong>,
+                {' '}
+                indicando relação fraca.
+              </p>
+            </li>
+            <li className="flex gap-3">
+              <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--brand)]" />
+              <p>
+                As redes destacadas no quadrante superior mostram que o avanço depende da combinação de preço, execução e sortimento.
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
     </SlideFrame>
@@ -299,8 +324,8 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
   return (
     <SlideFrame
       eyebrow="Dimensão de Negócio"
-      title="Categoria é a melhor lente para explicar o desempenho."
-      summary="Esse recorte organiza escala, crescimento e preço de forma comparável, sem perder clareza executiva."
+      title="Categoria revela escala, preço e crescimento."
+      summary="O recorte por categoria organiza a leitura do desempenho."
       index={index}
       total={total}
     >
@@ -327,53 +352,64 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
           },
         ]}
       />
-      <div className="mt-5 grid gap-4 xl:grid-cols-2">
-        <ChartCard compact question="Quais categorias concentram receita?" title="Receita por categoria" description="Comparação direta entre 2024 e 2025 para leitura de escala.">
-          <div className="h-[15rem] xl:h-[16rem]">
+      <div className="mt-3 grid gap-3 xl:grid-cols-3">
+        <ChartCard compact title="Receita por categoria" description="2024 x 2025.">
+          <div className="h-[18rem] xl:h-[20rem]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={[...categoryRevenue].sort((left, right) => right.sales2025 - left.sales2025)} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-                <CartesianGrid vertical={false} />
-                <XAxis dataKey="category" tickLine={false} axisLine={false} />
-                <YAxis tickLine={false} axisLine={false} width={72} tickFormatter={(value: number | string) => formatCompactCurrency(Number(value))} />
+              <BarChart data={[...categoryRevenue].sort((left, right) => right.sales2025 - left.sales2025)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
+                <CartesianGrid horizontal={false} />
+                <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatCompactCurrency(Number(value))} />
+                <YAxis type="category" dataKey="category" tickLine={false} axisLine={false} width={80} />
                 <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string, name: string) => [formatCurrency(Number(value)), name === 'sales2024' ? 'Receita 2024' : 'Receita 2025']} />
-                <Bar dataKey="sales2024" fill={chartPalette.slateSoft} radius={[6, 6, 0, 0]} />
-                <Bar dataKey="sales2025" fill={chartPalette.navy} radius={[6, 6, 0, 0]} />
+                <Legend formatter={(value: string) => value === 'sales2024' ? 'Receita 2024' : 'Receita 2025'} />
+                <Bar dataKey="sales2024" fill={chartPalette.slateSoft} radius={[0, 4, 4, 0]} />
+                <Bar dataKey="sales2025" fill={chartPalette.navy} radius={[0, 8, 8, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
-        <ChartCard compact question="Quais categorias crescem mais?" title="Crescimento por categoria" description="Ranking percentual para destacar aceleração relativa.">
-          <div className="h-[15rem] xl:h-[16rem]">
+        <ChartCard compact title="Crescimento por categoria" description="Ranking percentual.">
+          <div className="h-[18rem] xl:h-[20rem]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={[...categoryGrowth].sort((left, right) => right.growthPct - left.growthPct)} layout="vertical" margin={{ top: 8, right: 8, left: 18, bottom: 0 }}>
+              <BarChart data={[...categoryGrowth].sort((left, right) => right.growthPct - left.growthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
                 <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatPercent(Number(value), 0)} />
-                <YAxis type="category" dataKey="category" tickLine={false} axisLine={false} width={88} />
+                <YAxis type="category" dataKey="category" tickLine={false} axisLine={false} width={80} />
                 <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string) => [formatPercent(Number(value)), 'Crescimento']} />
                 <Bar dataKey="growthPct" fill={chartPalette.teal} radius={[0, 8, 8, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
-      </div>
-
-      <div className="mt-4">
-        <ChartCard compact question="Onde o preço mudou?" title="Preço médio por categoria" description="Dumbbell 2024 x 2025 para leitura direta da variação por categoria.">
-          <div className="h-[19rem] xl:h-[20rem]">
-            <CategoryPriceDumbbellChart data={categoryPrice} />
+        <ChartCard compact title="Variação de preço" description="Variação % do preço médio por categoria.">
+          <div className="h-[18rem] xl:h-[20rem]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={[...categoryPrice].sort((left, right) => right.priceGrowthPct - left.priceGrowthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
+                <CartesianGrid horizontal={false} />
+                <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatSignedPercent(Number(value), 0)} />
+                <YAxis type="category" dataKey="category" tickLine={false} axisLine={false} width={80} />
+                <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string) => [formatSignedPercent(Number(value)), 'Variação de preço']} />
+                <ReferenceLine x={0} stroke={chartPalette.slate} strokeDasharray="3 3" />
+                <Bar dataKey="priceGrowthPct" radius={[0, 8, 8, 0]}>
+                  {[...categoryPrice].sort((left, right) => right.priceGrowthPct - left.priceGrowthPct).map((entry) => (
+                    <Cell key={entry.category} fill={entry.priceGrowthPct >= 0 ? chartPalette.amber : chartPalette.red} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </ChartCard>
       </div>
 
-      <div className="mt-4 grid gap-4 xl:grid-cols-3">
-        <InsightBlock title="Escala" accent="brand">
-          <p><strong className="font-semibold text-[var(--ink)]">SALADAS</strong> concentra a maior receita do portfólio e ainda cresce em ritmo saudável.</p>
+      <div className="mt-3 grid gap-3 xl:grid-cols-3">
+        <InsightBlock compact title="Escala" accent="brand">
+          <p><strong className="font-semibold text-[var(--ink)]">SALADAS</strong> lidera a receita e mantém crescimento saudável.</p>
         </InsightBlock>
-        <InsightBlock title="Pressão de preço" accent="danger">
-          <p><strong className="font-semibold text-[var(--ink)]">IN NATURA</strong> e <strong className="font-semibold text-[var(--ink)]">COUVE</strong> cresceram com perda de preço médio, o que pede atenção de margem.</p>
+        <InsightBlock compact title="Pressão de preço" accent="danger">
+          <p><strong className="font-semibold text-[var(--ink)]">IN NATURA</strong> e <strong className="font-semibold text-[var(--ink)]">COUVE</strong> cresceram com perda de preço.</p>
         </InsightBlock>
-        <InsightBlock title="Melhor equilíbrio" accent="success">
-          <p><strong className="font-semibold text-[var(--ink)]">TEMPEROS</strong> combina ganho de volume com melhora de preço e representa a dinâmica mais equilibrada do slide.</p>
+        <InsightBlock compact title="Equilíbrio" accent="success">
+          <p><strong className="font-semibold text-[var(--ink)]">TEMPEROS</strong> combina ganho de volume e melhora de preço.</p>
         </InsightBlock>
       </div>
     </SlideFrame>
@@ -382,63 +418,170 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
 
 function YoYOverviewSlide({ index, total }: { index: number; total: number }) {
   const { overview } = reportData;
+  const yoySnapshot = [
+    {
+      metric: 'Receita',
+      value: formatCurrency(overview.revenue.value2025),
+      variation: overview.revenue.variationPct,
+      tone: chartPalette.navy,
+    },
+    {
+      metric: 'Volume',
+      value: formatNumber(overview.volume.value2025),
+      variation: overview.volume.variationPct,
+      tone: chartPalette.teal,
+    },
+    {
+      metric: 'Preço médio',
+      value: formatCurrency(overview.averagePrice.value2025, 2),
+      variation: overview.averagePrice.variationPct,
+      tone: chartPalette.amber,
+    },
+    {
+      metric: 'Sortimento',
+      value: formatNumber(overview.assortment.value2025),
+      variation: overview.assortment.variationPct,
+      tone: chartPalette.slate,
+    },
+  ];
+  const yoyComparison = [
+    { metric: 'Receita', base: 100, idx: Math.round(100 * (1 + overview.revenue.variationPct)), tone: chartPalette.navy },
+    { metric: 'Volume', base: 100, idx: Math.round(100 * (1 + overview.volume.variationPct)), tone: chartPalette.teal },
+    { metric: 'Preço médio', base: 100, idx: Math.round(100 * (1 + overview.averagePrice.variationPct)), tone: chartPalette.amber },
+    { metric: 'Sortimento', base: 100, idx: Math.round(100 * (1 + overview.assortment.variationPct)), tone: chartPalette.slate },
+  ];
 
   return (
     <SlideFrame
       eyebrow="Year over Year I"
-      title="O crescimento de 2025 veio quase todo de volume."
-      summary="A receita subiu 24,04%, muito próxima do avanço de volume. Preço médio e sortimento tiveram papel limitado na expansão."
+      title="Crescimento de 2025 veio quase todo de volume."
+      summary="Preço subiu marginalmente; portfólio estável."
       index={index}
       total={total}
     >
-      <MetricStrip
-        items={[
-          {
-            label: 'Receita',
-            value: formatCurrency(overview.revenue.value2025),
-            detail: `${formatPercent(overview.revenue.variationPct)} vs. 2024`,
-            emphasis: 'brand',
-          },
-          {
-            label: 'Volume',
-            value: formatNumber(overview.volume.value2025),
-            detail: `${formatPercent(overview.volume.variationPct)} vs. 2024`,
-          },
-          {
-            label: 'Preço médio',
-            value: formatCurrency(overview.averagePrice.value2025, 2),
-            detail: `${formatPercent(overview.averagePrice.variationPct)} vs. 2024`,
-            emphasis: 'muted',
-          },
-          {
-            label: 'Sortimento',
-            value: formatNumber(overview.assortment.value2025),
-            detail: 'Portfólio estável no consolidado.',
-            emphasis: 'muted',
-          },
-        ]}
-      />
-      <div className="mt-5 grid gap-4 xl:grid-cols-4">
-        <KpiCard
-          compact
-          label="Receita incremental"
-          value={formatSignedCurrency(overview.revenue.variationAbs)}
-          detail="Incremento absoluto versus 2024."
-          tone="brand"
-        />
-        <KpiCard
-          compact
-          label="Volume incremental"
-          value={formatNumber(overview.volume.variationAbs)}
-          detail="Unidades adicionais versus 2024."
-          tone="accent"
-        />
-        <InsightBlock compact title="Mecânica" accent="teal">
-          <p><strong className="font-semibold text-[var(--ink)]">Receita e volume caminharam juntos.</strong> O ganho de preço foi marginal.</p>
-        </InsightBlock>
-        <InsightBlock compact title="Leitura principal" accent="amber">
-          <p><strong className="font-semibold text-[var(--ink)]">O avanço não veio de ampliar portfólio.</strong> O consolidado cresceu com base na execução do mix atual.</p>
-        </InsightBlock>
+      <div className="grid gap-5 xl:grid-cols-[0.92fr_1.08fr]">
+        <div className="grid gap-4 content-start">
+          <article className="panel-strong rounded-[1.9rem] border p-5 lg:p-6">
+            <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white/70">
+              Ganho absoluto de receita
+            </p>
+            <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="font-display text-[2.15rem] font-semibold tracking-tight text-white lg:text-[2.6rem]">
+                  {formatSignedCurrency(overview.revenue.variationAbs)}
+                </p>
+                <p className="mt-2 text-[0.94rem] leading-6 text-white/78">
+                  Receita de 2025 fechou em {formatCurrency(overview.revenue.value2025)}.
+                </p>
+              </div>
+              <div className="rounded-[1.1rem] border border-white/10 bg-white/8 px-4 py-3">
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white/66">
+                  Volume incremental
+                </p>
+                <p className="font-display mt-1 text-[1.55rem] font-semibold text-white">
+                  {formatNumber(overview.volume.variationAbs)}
+                </p>
+                <p className="mt-1 text-[0.82rem] text-white/72">unidades adicionais</p>
+              </div>
+            </div>
+          </article>
+
+          <article className="panel rounded-[1.8rem] p-5">
+            <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+              <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                Quadro-resumo
+              </p>
+              <p className="text-[0.76rem] text-[var(--ink-soft)]">2025 vs. 2024</p>
+            </div>
+            <div className="mt-2 divide-y divide-[var(--border)]">
+              {yoySnapshot.map((row) => (
+                <div key={row.metric} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-3 py-3">
+                  <p className="font-display text-[0.92rem] font-medium text-[var(--ink)]">{row.metric}</p>
+                  <p className="text-right text-[0.92rem] font-semibold text-[var(--ink)]">{row.value}</p>
+                  <p className="text-right text-[0.9rem] font-semibold" style={{ color: row.tone }}>
+                    {formatSignedPercent(row.variation)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
+
+        <div className="grid gap-4 content-start">
+          <ChartCard compact title="Mecânica do crescimento" description="2024 = base 100 — comparativo indexado por vetor.">
+            <div className="h-[15rem] xl:h-[17rem]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={yoyComparison}
+                  margin={{ top: 8, right: 18, left: 10, bottom: 0 }}
+                  barCategoryGap={22}
+                  barGap={3}
+                >
+                  <CartesianGrid vertical={false} />
+                  <XAxis dataKey="metric" tickLine={false} axisLine={false} />
+                  <YAxis tickLine={false} axisLine={false} width={36} domain={[0, 140]} tickFormatter={(value: number | string) => String(Number(value))} />
+                  <Tooltip
+                    contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }}
+                    formatter={(value: number | string, name: string) => [
+                      name === 'base' ? '100' : `${value} (+${Number(value) - 100}%)`,
+                      name === 'base' ? '2024 (base)' : '2025 (índice)',
+                    ]}
+                  />
+                  <Legend formatter={(value: string) => value === 'base' ? '2024 (base = 100)' : '2025 (índice)'} />
+                  <ReferenceLine y={100} stroke={chartPalette.slate} strokeDasharray="4 3" label={{ value: 'base 2024', position: 'insideTopRight', fontSize: 10, fill: '#7a8a98' }} />
+                  <Bar dataKey="base" fill={chartPalette.slateSoft} radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="idx" radius={[6, 6, 0, 0]}>
+                    {yoyComparison.map((row) => (
+                      <Cell key={row.metric} fill={row.tone} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </ChartCard>
+
+          <div className="grid gap-3 xl:grid-cols-3">
+            <div className="border-t border-[var(--border)] pt-3">
+              <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                Principal driver
+              </p>
+              <ul className="mt-3 space-y-2.5 text-[0.95rem] leading-6 text-[var(--ink)]">
+                <li className="flex gap-3">
+                  <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]" />
+                  <p>
+                    <strong className="font-semibold">Volume cresceu {formatSignedPercent(overview.volume.variationPct)}</strong> e sustentou o avanço da receita.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div className="border-t border-[var(--border)] pt-3">
+              <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--warning)]">
+                Papel do preço
+              </p>
+              <ul className="mt-3 space-y-2.5 text-[0.95rem] leading-6 text-[var(--ink)]">
+                <li className="flex gap-3">
+                  <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--warning)]" />
+                  <p>
+                    <strong className="font-semibold">Preço médio subiu só {formatSignedPercent(overview.averagePrice.variationPct)}</strong>, com contribuição marginal.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div className="border-t border-[var(--border)] pt-3">
+              <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--ink-soft)]">
+                Portfólio
+              </p>
+              <ul className="mt-3 space-y-2.5 text-[0.95rem] leading-6 text-[var(--ink)]">
+                <li className="flex gap-3">
+                  <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--ink-soft)]" />
+                  <p>
+                    <strong className="font-semibold">Sortimento permaneceu em {formatNumber(overview.assortment.value2025)} itens</strong>, sem explicar o crescimento.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </SlideFrame>
   );
@@ -457,13 +600,13 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
   return (
     <SlideFrame
       eyebrow="Year over Year II"
-      title="O avanço ficou concentrado em poucas redes."
-      summary="Os principais ganhos e perdas vieram de um grupo pequeno de contas, reforçando a dependência da carteira."
+      title="Poucas redes explicam o crescimento de 2025."
+      summary="Top 3 impulsionadores e top 3 detratores por impacto absoluto."
       index={index}
       total={total}
     >
       <div className="grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
-        <ChartCard compact question="Quais redes explicam o YoY?" title="Impacto YoY por rede" description="Barras positivas mostram quem puxou o crescimento; barras negativas mostram onde houve retração.">
+        <ChartCard compact title="Impacto YoY por rede" description="Impacto absoluto por rede.">
           <div className="h-[19rem] xl:h-[22rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={sortedDrivers} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
@@ -482,7 +625,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
           <div className="overflow-hidden rounded-[1.6rem] border border-[var(--border-strong)] bg-white/30">
             <div className="border-b border-[var(--border)] px-5 py-4">
               <p className="font-display text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--success)]">
-                Quem puxou o crescimento
+                Impulsionadores
               </p>
             </div>
             <div className="divide-y divide-[var(--border)]">
@@ -490,7 +633,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
                 <div key={row.network} className="flex items-start justify-between gap-3 px-5 py-4">
                   <div>
                     <p className="font-display text-lg font-semibold text-[var(--ink)]">{row.network}</p>
-                    <p className="mt-1 text-sm text-[var(--ink-soft)]">{formatSignedPercent(row.growthPct)} versus 2024</p>
+                    <p className="mt-1 text-sm text-[var(--ink-soft)]">{formatSignedPercent(row.growthPct)}</p>
                   </div>
                   <p className="font-display text-lg font-semibold text-[var(--success)]">{formatSignedCurrency(row.growthAbs)}</p>
                 </div>
@@ -500,7 +643,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
           <div className="overflow-hidden rounded-[1.6rem] border border-[var(--border-strong)] bg-white/30">
             <div className="border-b border-[var(--border)] px-5 py-4">
               <p className="font-display text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--danger)]">
-                Quem freou o resultado
+                Detratores
               </p>
             </div>
             <div className="divide-y divide-[var(--border)]">
@@ -508,7 +651,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
                 <div key={row.network} className="flex items-start justify-between gap-3 px-5 py-4">
                   <div>
                     <p className="font-display text-lg font-semibold text-[var(--ink)]">{row.network}</p>
-                    <p className="mt-1 text-sm text-[var(--ink-soft)]">{formatSignedPercent(row.growthPct)} versus 2024</p>
+                    <p className="mt-1 text-sm text-[var(--ink-soft)]">{formatSignedPercent(row.growthPct)}</p>
                   </div>
                   <p className="font-display text-lg font-semibold text-[var(--danger)]">{formatSignedCurrency(row.growthAbs)}</p>
                 </div>
@@ -523,112 +666,257 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
 
 function YoYCategoriesSlide({ index, total }: { index: number; total: number }) {
   const { categoryImpact, overview } = reportData;
-  const sortedCategoryImpact = [...categoryImpact].sort((left, right) => right.growthAbs - left.growthAbs);
+  const sortedByAbs = [...categoryImpact].sort((left, right) => right.growthAbs - left.growthAbs);
+  const sortedByPct = [...categoryImpact].sort((left, right) => right.growthPct - left.growthPct);
 
   return (
     <SlideFrame
       eyebrow="Year over Year III"
       title="Todas as categorias cresceram em valor em 2025."
-      summary="SALADAS lidera a contribuição absoluta, enquanto TEMPEROS se destaca pela aceleração percentual."
+      summary="SALADAS lidera em impacto absoluto; GOURMET em crescimento percentual."
       index={index}
       total={total}
     >
-      <div className="mt-5 grid gap-5 xl:grid-cols-[1.16fr_0.84fr]">
-        <ChartCard compact question="Quais categorias sustentaram o YoY?" title="Impacto YoY por categoria" description="Leitura do ganho absoluto de receita por categoria em 2025 versus 2024.">
-          <div className="h-[18rem] xl:h-[22rem]">
+      <MetricStrip
+        columns={3}
+        items={[
+          {
+            label: 'Crescimento total',
+            value: formatSignedCurrency(overview.revenue.variationAbs),
+            detail: 'Incremento vs 2024.',
+            emphasis: 'brand',
+          },
+          {
+            label: 'Maior contribuição absoluta',
+            value: sortedByAbs[0]?.category ?? '—',
+            detail: formatSignedCurrency(sortedByAbs[0]?.growthAbs ?? 0),
+            emphasis: 'accent',
+          },
+          {
+            label: 'Maior crescimento %',
+            value: overview.fastestCategory.category,
+            detail: formatSignedPercent(overview.fastestCategory.growthPct),
+            emphasis: 'muted',
+          },
+        ]}
+      />
+      <div className="mt-4 grid gap-4 xl:grid-cols-2">
+        <ChartCard compact title="Impacto absoluto por categoria" description="Crescimento em R$ — quem mais contribuiu.">
+          <div className="h-[18rem] xl:h-[20rem]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={sortedCategoryImpact} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
+              <BarChart data={sortedByAbs} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
                 <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatCompactCurrency(Number(value))} />
-                <YAxis type="category" dataKey="category" tickLine={false} axisLine={false} width={110} />
+                <YAxis type="category" dataKey="category" tickLine={false} axisLine={false} width={80} />
                 <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string) => [formatSignedCurrency(Number(value)), 'Impacto']} labelFormatter={(label) => `Categoria: ${label}`} />
                 <Bar dataKey="growthAbs" radius={[0, 8, 8, 0]}>
-                  {sortedCategoryImpact.map((entry) => <Cell key={entry.category} fill={entry.growthAbs >= 0 ? chartPalette.success : chartPalette.red} />)}
+                  {sortedByAbs.map((entry) => <Cell key={entry.category} fill={entry.growthAbs >= 0 ? chartPalette.success : chartPalette.red} />)}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
-        <div className="grid gap-4 content-start">
-          <div className="overflow-hidden rounded-[1.6rem] border border-[var(--border-strong)] bg-white/30">
-            <div className="border-b border-[var(--border)] px-5 py-4">
-              <p className="font-display text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                Maiores contribuições
-              </p>
-            </div>
-            <div className="divide-y divide-[var(--border)]">
-              {sortedCategoryImpact.slice(0, 4).map((row) => (
-                <div key={row.category} className="flex items-start justify-between gap-3 px-5 py-4">
-                  <div>
-                    <p className="font-display text-lg font-semibold text-[var(--ink)]">{row.category}</p>
-                    <p className="mt-1 text-sm text-[var(--ink-soft)]">{formatSignedPercent(row.growthPct)} versus 2024</p>
-                  </div>
-                  <p className="font-display text-lg font-semibold text-[var(--brand)]">{formatSignedCurrency(row.growthAbs)}</p>
-                </div>
-              ))}
-            </div>
+        <ChartCard compact title="Crescimento % por categoria" description="Taxa de crescimento — quem cresceu mais rápido.">
+          <div className="h-[18rem] xl:h-[20rem]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={sortedByPct} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
+                <CartesianGrid horizontal={false} />
+                <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatPercent(Number(value), 0)} />
+                <YAxis type="category" dataKey="category" tickLine={false} axisLine={false} width={80} />
+                <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string) => [formatSignedPercent(Number(value)), 'Crescimento']} labelFormatter={(label) => `Categoria: ${label}`} />
+                <Bar dataKey="growthPct" fill={chartPalette.teal} radius={[0, 8, 8, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
-          <InsightBlock compact title="Leitura central" accent="teal">
-            <p><strong className="font-semibold text-[var(--ink)]">Nenhuma categoria caiu em valor absoluto.</strong> O crescimento foi disseminado no portfólio.</p>
-          </InsightBlock>
-          <InsightBlock compact title="Maior crescimento %" accent="amber">
-            <p><strong className="font-semibold text-[var(--ink)]">{overview.fastestCategory.category}</strong> lidera a expansão percentual entre as categorias.</p>
-          </InsightBlock>
-        </div>
+        </ChartCard>
+      </div>
+      <div className="mt-3 grid gap-3 xl:grid-cols-3">
+        <InsightBlock compact title="Nenhuma caiu" accent="teal">
+          <p>Todas as categorias cresceram em valor absoluto em 2025.</p>
+        </InsightBlock>
+        <InsightBlock compact title="Maior escala" accent="brand">
+          <p><strong className="font-semibold text-[var(--ink)]">{sortedByAbs[0]?.category}</strong> concentrou o maior impacto em R$.</p>
+        </InsightBlock>
+        <InsightBlock compact title="Maior velocidade" accent="success">
+          <p><strong className="font-semibold text-[var(--ink)]">{overview.fastestCategory.category}</strong> liderou em % apesar da escala menor.</p>
+        </InsightBlock>
       </div>
     </SlideFrame>
   );
 }
 
 function RemunerationSlide({ index, total }: { index: number; total: number }) {
+  const incentiveComposition = [
+    {
+      label: 'Volume comparável',
+      weight: 40,
+      rationale: 'Premia expansão real de vendas.',
+      fill: chartPalette.navy,
+    },
+    {
+      label: 'Preço',
+      weight: 30,
+      rationale: 'Evita crescimento via desconto excessivo.',
+      fill: chartPalette.teal,
+    },
+    {
+      label: 'Sortimento',
+      weight: 20,
+      rationale: 'Incentiva aumento de penetração e portfólio.',
+      fill: chartPalette.amber,
+    },
+    {
+      label: 'Mix',
+      weight: 10,
+      rationale: 'Ajuda a evitar concentração em poucos produtos.',
+      fill: chartPalette.slate,
+    },
+  ];
+  const stackedComposition = [
+    incentiveComposition.reduce<Record<string, string | number>>(
+      (acc, item) => {
+        acc[item.label] = item.weight;
+        return acc;
+      },
+      { bucket: 'Composição' },
+    ),
+  ];
+
   return (
     <SlideFrame
       eyebrow="Remuneração Variável"
-      title="O incentivo precisa premiar crescimento com qualidade."
-      summary="A proposta separa expansão real de volume, disciplina de preço, ganho de sortimento e execução de mix."
+      title="Proposta para crescimento com disciplina comercial."
       index={index}
       total={total}
     >
-      <MetricStrip
-        items={[
-          {
-            label: 'Volume comparável',
-            value: '40%',
-            detail: 'Premia expansão real de vendas.',
-            emphasis: 'brand',
-          },
-          {
-            label: 'Preço',
-            value: '30%',
-            detail: 'Evita crescimento via desconto excessivo.',
-          },
-          {
-            label: 'Sortimento',
-            value: '20%',
-            detail: 'Aumenta penetração de portfólio.',
-            emphasis: 'muted',
-          },
-          {
-            label: 'Mix',
-            value: '10%',
-            detail: 'Reduz concentração em poucos produtos.',
-            emphasis: 'accent',
-          },
-        ]}
-      />
-      <div className="mt-5 grid gap-4 xl:grid-cols-2">
-        <InsightBlock compact title="Princípio" accent="brand">
-          <p><strong className="font-semibold text-[var(--ink)]">Pagar por qualidade de crescimento</strong>, e não apenas por volume vendido.</p>
-        </InsightBlock>
-        <InsightBlock compact title="Lógica" accent="teal">
-          <p>Volume premia expansão, preço protege valor, sortimento amplia penetração e mix melhora execução.</p>
-        </InsightBlock>
-        <InsightBlock compact title="Governança" accent="amber">
-          <p><strong className="font-semibold text-[var(--ink)]">Clientes novos devem ser medidos à parte</strong>, e ganho de sortimento só deve contar com recorrência mínima.</p>
-        </InsightBlock>
-        <InsightBlock compact title="Regra crítica" accent="danger">
-          <p><strong className="font-semibold text-[var(--ink)]">Preço precisa de piso mínimo</strong> para evitar pagamento integral com erosão de valor.</p>
-        </InsightBlock>
+      <div className="grid gap-5 xl:grid-cols-[1.14fr_0.86fr]">
+        <article className="panel rounded-[1.9rem] p-5 lg:p-6">
+          <div className="max-w-[34rem]">
+            <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+              Estrutura de pesos
+            </p>
+            <h3 className="font-display mt-2 text-[1.42rem] font-semibold leading-[1.08] tracking-[-0.02em] text-[var(--ink)] lg:text-[1.66rem]">
+              40% volume comparável YoY, 30% disciplina de preço, 20% crescimento de sortimento por cliente e 10% execução de mix em clientes foco.
+            </h3>
+          </div>
+
+          <div className="mt-6 overflow-hidden rounded-[1.2rem] border border-[var(--border)] bg-white/56 p-4">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+              Composição do bônus
+            </p>
+
+            <div className="chart-grid mt-4 h-[5.5rem]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={stackedComposition}
+                  layout="vertical"
+                  margin={{ top: 6, right: 6, left: 6, bottom: 6 }}
+                  barSize={34}
+                >
+                  <XAxis type="number" domain={[0, 100]} hide />
+                  <YAxis type="category" dataKey="bucket" hide />
+                  <Tooltip
+                    contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }}
+                    formatter={(value: number | string, name: string) => [`${value}%`, name]}
+                    cursor={{ fill: 'rgba(15,27,42,0.04)' }}
+                  />
+                  {incentiveComposition.map((item, index) => (
+                    <Bar
+                      key={item.label}
+                      dataKey={item.label}
+                      stackId="composition"
+                      fill={item.fill}
+                      radius={
+                        index === 0
+                          ? [10, 0, 0, 10]
+                          : index === incentiveComposition.length - 1
+                            ? [0, 10, 10, 0]
+                            : [0, 0, 0, 0]
+                      }
+                    />
+                  ))}
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="mt-3 grid grid-cols-4 gap-3">
+              {incentiveComposition.map((item) => (
+                <div key={item.label} className="rounded-[0.9rem] border border-[var(--border)] bg-white/72 px-3 py-3 text-center">
+                  <p className="font-display text-[1.14rem] font-semibold leading-none" style={{ color: item.fill }}>
+                    {item.weight}%
+                  </p>
+                  <p className="mt-2 text-[0.72rem] uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4 overflow-hidden rounded-[1.2rem] border border-[var(--border)] bg-white/56">
+            <div className="grid grid-cols-[1.15fr_1.85fr] gap-0 border-b border-[var(--border)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+              <p>Componente</p>
+              <p>Racional</p>
+            </div>
+            <div className="divide-y divide-[var(--border)]">
+              {incentiveComposition.map((item) => (
+                <div key={item.label} className="grid grid-cols-[1.15fr_1.85fr] items-center gap-0 px-4 py-3">
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className="h-2.5 w-2.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: item.fill }}
+                    />
+                    <p className="font-display text-[0.95rem] font-medium text-[var(--ink)]">{item.label}</p>
+                  </div>
+                  <p className="text-[0.88rem] leading-5 text-[var(--ink-soft)]">{item.rationale}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <article className="panel rounded-[1.9rem] p-5 lg:p-6">
+          <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+            Objetivo e governança
+          </p>
+          <div className="border-b border-[var(--border)] pb-4">
+            
+            <ul className="mt-3 space-y-2.5 text-[0.98rem] leading-6 text-[var(--ink)]">
+              <li className="flex gap-3">
+                <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--brand)]" />
+                <p>Remunerar crescimento com qualidade.</p>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]" />
+                <p>Considerar simultaneamente crescimento de volume, disciplina de preço e aumento de sortimento.</p>
+              </li>
+            </ul>
+          </div>
+
+          <div className="mt-4">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+              Regras de governança recomendadas
+            </p>
+            <ul className="mt-3 space-y-3 text-[0.98rem] leading-6 text-[var(--ink)]">
+              <li className="flex gap-3">
+                <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]" />
+                <p>Clientes novos devem ser medidos separadamente de clientes comparáveis.</p>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--warning)]" />
+                <p>Crescimento baseado apenas em desconto deve ter redutor.</p>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--ink-soft)]" />
+                <p>Ganho de sortimento só deve contar com recorrência mínima.</p>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--brand)]" />
+                <p>O componente de preço deve ter piso mínimo de elegibilidade.</p>
+              </li>
+            </ul>
+          </div>
+        </article>
       </div>
     </SlideFrame>
   );
