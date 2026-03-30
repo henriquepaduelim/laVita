@@ -58,17 +58,6 @@ export function SlideDeck() {
         Pular para o conteúdo
       </a>
 
-      {/* Minimal brand indicator — top left, barely visible */}
-      <div className="no-print pointer-events-none absolute left-7 top-4 z-30 flex items-center gap-2">
-        <p className="font-display text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[var(--ink)] opacity-30">
-          La Vita
-        </p>
-        <span className="h-px w-3 bg-[var(--ink)] opacity-20" />
-        <p className="font-display text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-[var(--ink)] opacity-20">
-          {String(activeIndex + 1).padStart(2, '0')}&thinsp;/&thinsp;{String(deckSlides.length).padStart(2, '0')}
-        </p>
-      </div>
-
       <div className="no-print pointer-events-none absolute inset-y-0 left-0 right-0 z-20">
         <button
           type="button"

@@ -12,7 +12,6 @@ type ChartCardProps = {
 export function ChartCard({
   title,
   description,
-  question,
   children,
   className = '',
   compact = false,
@@ -25,12 +24,7 @@ export function ChartCard({
           : 'panel panel-interactive rounded-[2rem] p-6 md:p-7'
       } ${className}`.trim()}
     >
-      {question ? (
-        <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-          {question}
-        </p>
-      ) : null}
-      <h3 className={`font-display ${compact ? 'mt-1.5 text-[1.05rem]' : 'mt-3 text-2xl'} font-semibold tracking-tight text-[var(--ink)]`}>
+      <h3 className={`font-display ${compact ? 'text-[1.05rem]' : 'mt-3 text-2xl'} font-semibold tracking-tight text-[var(--ink)]`}>
         {title}
       </h3>
       <p className={`mt-1.5 max-w-2xl ${compact ? 'text-[0.82rem] leading-5' : 'text-base leading-7'} text-[var(--ink-soft)]`}>
