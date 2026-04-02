@@ -58,7 +58,7 @@ export function SlideDeck() {
         Pular para o conteúdo
       </a>
 
-      <div className="no-print pointer-events-none absolute inset-y-0 left-0 right-0 z-20">
+      <div className="no-print pointer-events-none absolute inset-y-0 left-0 right-0 z-20 hidden md:block">
         <button
           type="button"
           onClick={() => goToSlide(activeIndex - 1)}
@@ -103,8 +103,34 @@ export function SlideDeck() {
         </AnimatePresence>
       </main>
 
+      <div className="no-print pointer-events-none absolute inset-x-0 bottom-3 z-30 px-4 md:hidden">
+        <div className="pointer-events-auto grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 rounded-[1.1rem] border border-[var(--border)] bg-white/78 px-3 py-2.5 shadow-[0_10px_24px_rgba(8,18,29,0.08)] backdrop-blur-sm">
+          <button
+            type="button"
+            onClick={() => goToSlide(activeIndex - 1)}
+            disabled={activeIndex === 0}
+            className="flex min-h-11 items-center justify-start rounded-[0.9rem] px-3 text-sm font-semibold text-[var(--ink)] transition-colors duration-200 hover:bg-white disabled:pointer-events-none disabled:opacity-35"
+            aria-label="Slide anterior"
+          >
+            Anterior
+          </button>
+          <p className="text-center text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(deckSlides.length).padStart(2, '0')}
+          </p>
+          <button
+            type="button"
+            onClick={() => goToSlide(activeIndex + 1)}
+            disabled={activeIndex === deckSlides.length - 1}
+            className="flex min-h-11 items-center justify-end rounded-[0.9rem] px-3 text-sm font-semibold text-[var(--ink)] transition-colors duration-200 hover:bg-white disabled:pointer-events-none disabled:opacity-35"
+            aria-label="Próximo slide"
+          >
+            Próximo
+          </button>
+        </div>
+      </div>
+
       {/* Minimal dot navigation — bottom center */}
-      <div className="no-print pointer-events-none absolute inset-x-0 bottom-3 z-30 flex justify-center">
+      <div className="no-print pointer-events-none absolute inset-x-0 bottom-[4.65rem] z-30 flex justify-center md:bottom-3">
         <div className="pointer-events-auto flex items-center gap-[5px]">
           {deckSlides.map((slide, index) => {
             const active = index === activeIndex;
@@ -115,8 +141,8 @@ export function SlideDeck() {
                 onClick={() => goToSlide(index)}
                 className={`rounded-full transition-all duration-300 ${
                   active
-                    ? 'h-[5px] w-[18px] bg-[var(--brand)] opacity-50'
-                    : 'h-[5px] w-[5px] bg-[var(--ink)] opacity-20 hover:opacity-40'
+                    ? 'h-[6px] w-[22px] bg-[var(--brand)] opacity-55'
+                    : 'h-[6px] w-[6px] bg-[var(--ink)] opacity-20 hover:opacity-40'
                 }`}
                 aria-label={`Ir para ${slide.label}`}
                 aria-current={active ? 'step' : undefined}

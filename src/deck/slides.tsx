@@ -184,25 +184,29 @@ function ParetoSlide({ index, total }: { index: number; total: number }) {
             </div>
 
             <div className="mt-3 overflow-hidden rounded-[1.1rem] border border-[var(--border)] bg-white/42">
-              <div className="grid grid-cols-[2rem_minmax(0,1fr)_4.5rem] gap-3 border-b border-[var(--border)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
-                <p>Pos.</p>
-                <p>Rede</p>
-                <p className="text-right">Share</p>
-              </div>
-              <div className="divide-y divide-[var(--border)]">
-                {topPriorityNetworks.map((row, rowIndex) => (
-                  <div key={row.network} className="grid grid-cols-[2rem_minmax(0,1fr)_4.5rem] items-center gap-3 px-4 py-2.5">
-                    <p className="font-display text-[0.95rem] font-semibold text-[var(--brand)]">
-                      {String(rowIndex + 1).padStart(2, '0')}
-                    </p>
-                    <p className="truncate font-display text-[0.92rem] font-medium text-[var(--ink)]">
-                      {row.network}
-                    </p>
-                    <p className="text-right text-[0.84rem] font-semibold text-[var(--ink-soft)]">
-                      {formatPercent(row.share)}
-                    </p>
+              <div className="mobile-table-scroll">
+                <div className="mobile-table-inner">
+                  <div className="grid grid-cols-[2rem_minmax(0,1fr)_4.5rem] gap-3 border-b border-[var(--border)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+                    <p>Pos.</p>
+                    <p>Rede</p>
+                    <p className="text-right">Share</p>
                   </div>
-                ))}
+                  <div className="divide-y divide-[var(--border)]">
+                    {topPriorityNetworks.map((row, rowIndex) => (
+                      <div key={row.network} className="grid grid-cols-[2rem_minmax(0,1fr)_4.5rem] items-center gap-3 px-4 py-2.5">
+                        <p className="font-display text-[0.95rem] font-semibold text-[var(--brand)]">
+                          {String(rowIndex + 1).padStart(2, '0')}
+                        </p>
+                        <p className="truncate font-display text-[0.92rem] font-medium text-[var(--ink)]">
+                          {row.network}
+                        </p>
+                        <p className="text-right text-[0.84rem] font-semibold text-[var(--ink-soft)]">
+                          {formatPercent(row.share)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -246,6 +250,12 @@ function ParetoSlide({ index, total }: { index: number; total: number }) {
 
 function ClientSlide({ index, total }: { index: number; total: number }) {
   const { overview, references, scatter } = reportData;
+  const sortLeadersLabel = overview.highestSortNetworks.length > 1
+    ? `${formatNumber(overview.highestSortNetworks.length)} redes`
+    : overview.highestSortNetworks[0];
+  const sortLeadersDetail = overview.highestSortNetworks.length > 1
+    ? `${formatNumber(overview.highestSortValue)} SKUs no teto de sortimento`
+    : `${formatNumber(overview.highestSortValue)} SKUs`;
   const highlightedNetworks = [
     references.gpa.network,
     references.stMarche.network,
@@ -275,9 +285,9 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
             detail: `${formatNumber(references.gpa.qty2025)} unidades`,
           },
           {
-            label: 'Maior sortimento',
-            value: references.daolio.network,
-            detail: `${formatNumber(references.daolio.sort2025)} SKUs`,
+            label: overview.highestSortNetworks.length > 1 ? 'Líder em sortimento (empate)' : 'Maior sortimento',
+            value: sortLeadersLabel,
+            detail: sortLeadersDetail,
             emphasis: 'muted',
           },
           {
@@ -289,7 +299,7 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
         ]}
       />
       <div className="mt-5 grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
-        <ChartCard compact title="Preço médio x crescimento por rede" description="Correlação entre preço e crescimento.">
+        <ChartCard compact title="Preço médio x crescimento por rede" description="Leitura exploratória da relação entre preço e crescimento.">
           <div className="h-[18rem] xl:h-[22rem]">
             <PriceGrowthScatterChart
               data={scatter}
@@ -307,15 +317,29 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
             <li className="flex gap-3">
               <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--success)]" />
               <p>
-                <strong className="font-semibold">{references.mQualidade.network}</strong> registrou o maior crescimento percentual, com
+                <strong className="font-semibold">{references.mQualidade.network}</strong> foi a rede que mais acelerou na comparação anual, com
                 {' '}
-                <strong className="font-semibold">{formatPercent(references.mQualidade.growthPct)}</strong>.
+                <strong className="font-semibold">{formatPercent(references.mQualidade.growthPct)}</strong>,
+                {' '}
+                ao passar de
+                {' '}
+                <strong className="font-semibold">{formatCurrency(references.mQualidade.sales2024)}</strong>
+                {' '}
+                para
+                {' '}
+                <strong className="font-semibold">{formatCurrency(references.mQualidade.sales2025)}</strong>.
+                {' '}
+                Em termos absolutos, isso representou
+                {' '}
+                <strong className="font-semibold">{formatSignedCurrency(references.mQualidade.growthAbs)}</strong>,
+                {' '}
+                o que posiciona o caso como destaque de ritmo, e não como a maior contribuição financeira do período.
               </p>
             </li>
             <li className="flex gap-3">
               <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--warning)]" />
               <p>
-                <strong className="font-semibold">{references.db.network}</strong> tem o maior preço médio, em
+                <strong className="font-semibold">{references.db.network}</strong> opera com o maior preço médio da base, em
                 {' '}
                 <strong className="font-semibold">{formatCurrency(references.db.price2025, 2)}</strong>
                 {' '}
@@ -325,17 +349,23 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
             <li className="flex gap-3">
               <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]" />
               <p>
-                A correlação entre preço e crescimento é
+                No conjunto da carteira, preço e crescimento mostram relação linear muito fraca: a correlação simples é
                 {' '}
                 <strong className="font-semibold">{formatRatio(overview.scatterCorrelation, 2)}</strong>,
                 {' '}
-                indicando relação fraca.
+                o que sugere que preço, isoladamente, não explica quem cresce mais.
               </p>
             </li>
             <li className="flex gap-3">
               <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[var(--brand)]" />
               <p>
-                As redes destacadas no quadrante superior mostram que o avanço depende da combinação de preço, execução e sortimento.
+                Em geração de receita adicional, o principal destaque foi
+                {' '}
+                <strong className="font-semibold">{references.stMarche.network}</strong>,
+                {' '}
+                com
+                {' '}
+                <strong className="font-semibold">{formatSignedCurrency(references.stMarche.growthAbs)}</strong>.
               </p>
             </li>
           </ul>
@@ -480,7 +510,7 @@ function YoYOverviewSlide({ index, total }: { index: number; total: number }) {
 
   return (
     <SlideFrame
-      eyebrow="Year over Year I"
+      eyebrow="Crescimento YoY I"
       title="Crescimento de 2025 veio quase todo de volume."
       summary="Preço subiu marginalmente; portfólio estável."
       index={index}
@@ -520,16 +550,18 @@ function YoYOverviewSlide({ index, total }: { index: number; total: number }) {
               </p>
               <p className="text-[0.76rem] text-[var(--ink-soft)]">2025 vs. 2024</p>
             </div>
-            <div className="mt-2 divide-y divide-[var(--border)]">
-              {yoySnapshot.map((row) => (
-                <div key={row.metric} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-3 py-3">
-                  <p className="font-display text-[0.92rem] font-medium text-[var(--ink)]">{row.metric}</p>
-                  <p className="text-right text-[0.92rem] font-semibold text-[var(--ink)]">{row.value}</p>
-                  <p className="text-right text-[0.9rem] font-semibold" style={{ color: row.tone }}>
-                    {formatSignedPercent(row.variation)}
-                  </p>
-                </div>
-              ))}
+            <div className="mobile-table-scroll mt-2">
+              <div className="mobile-table-inner divide-y divide-[var(--border)]">
+                {yoySnapshot.map((row) => (
+                  <div key={row.metric} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-3 py-3">
+                    <p className="font-display text-[0.92rem] font-medium text-[var(--ink)]">{row.metric}</p>
+                    <p className="text-right text-[0.92rem] font-semibold text-[var(--ink)]">{row.value}</p>
+                    <p className="text-right text-[0.9rem] font-semibold" style={{ color: row.tone }}>
+                      {formatSignedPercent(row.variation)}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </article>
         </div>
@@ -570,7 +602,7 @@ function YoYOverviewSlide({ index, total }: { index: number; total: number }) {
           <div className="grid gap-3 xl:grid-cols-3">
             <div className="border-t border-[var(--border)] pt-3">
               <p className="font-display text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                Principal driver
+                Principal alavanca
               </p>
               <ul className="mt-3 space-y-2.5 text-[0.95rem] leading-6 text-[var(--ink)]">
                 <li className="flex gap-3">
@@ -626,20 +658,21 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
 
   return (
     <SlideFrame
-      eyebrow="Year over Year II"
+      eyebrow="Crescimento YoY II"
       title="Poucas redes explicam o crescimento de 2025."
-      summary="Top 3 impulsionadores e top 3 detratores por impacto absoluto."
+      summary="Recorte dos principais impulsionadores e detratores por impacto absoluto."
       index={index}
       total={total}
     >
       <div className="grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
-        <ChartCard compact title="Impacto YoY por rede" description="Impacto absoluto por rede.">
+        <ChartCard compact title="Principais impactos YoY por rede" description="Recorte dos maiores impactos absolutos por rede.">
           <div className="h-[19rem] xl:h-[22rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={sortedDrivers} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
                 <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatCompactCurrency(Number(value))} />
                 <YAxis type="category" dataKey="network" tickLine={false} axisLine={false} width={106} />
+                <ReferenceLine x={0} stroke={chartPalette.slate} strokeDasharray="3 3" />
                 <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string) => [formatSignedCurrency(Number(value)), 'Impacto']} labelFormatter={(label) => `Rede: ${label}`} />
                 <Bar dataKey="growthAbs" radius={[0, 8, 8, 0]}>
                   {sortedDrivers.map((entry) => <Cell key={entry.network} fill={entry.growthAbs >= 0 ? chartPalette.success : chartPalette.red} />)}
@@ -698,9 +731,9 @@ function YoYCategoriesSlide({ index, total }: { index: number; total: number }) 
 
   return (
     <SlideFrame
-      eyebrow="Year over Year III"
-      title="Todas as categorias cresceram em valor em 2025."
-      summary="SALADAS lidera em impacto absoluto; GOURMET em crescimento percentual."
+      eyebrow="Crescimento YoY III"
+      title="As categorias ativas cresceram em valor em 2025."
+      summary="Entre as categorias ativas, SALADAS lidera em impacto absoluto e GOURMET em crescimento percentual."
       index={index}
       total={total}
     >
@@ -710,7 +743,7 @@ function YoYCategoriesSlide({ index, total }: { index: number; total: number }) 
           {
             label: 'Crescimento total',
             value: formatSignedCurrency(overview.revenue.variationAbs),
-            detail: 'Incremento vs 2024.',
+            detail: 'Incremento vs. 2024.',
             emphasis: 'brand',
           },
           {
@@ -758,8 +791,8 @@ function YoYCategoriesSlide({ index, total }: { index: number; total: number }) 
         </ChartCard>
       </div>
       <div className="mt-3 grid gap-3 xl:grid-cols-3">
-        <InsightBlock compact title="Nenhuma caiu" accent="teal">
-          <p>Todas as categorias cresceram em valor absoluto em 2025.</p>
+        <InsightBlock compact title="Categorias ativas" accent="teal">
+          <p>Entre as categorias ativas e comparáveis, nenhuma caiu em valor absoluto em 2025.</p>
         </InsightBlock>
         <InsightBlock compact title="Maior escala" accent="brand">
           <p><strong className="font-semibold text-[var(--ink)]">{sortedByAbs[0]?.category}</strong> concentrou o maior impacto em R$.</p>
@@ -813,7 +846,7 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
     <SlideFrame
       eyebrow="Remuneração Variável"
       title="Proposta para crescimento com disciplina comercial."
-      summary="Bônus: 40% volume comparável, 30% preço, 20% sortimento, 10% mix."
+      summary="Bônus: 40% de volume comparável, 30% de disciplina de preço, 20% de sortimento e 10% de mix."
       index={index}
       total={total}
     >
@@ -824,7 +857,7 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
               Estrutura de pesos
             </p>
             <h3 className="font-display mt-2 text-[1.42rem] font-semibold leading-[1.08] tracking-[-0.02em] text-[var(--ink)] lg:text-[1.66rem]">
-              40% volume comparável YoY, 30% disciplina de preço, 20% crescimento de sortimento por cliente e 10% execução de mix em clientes foco.
+              40% de volume comparável YoY, 30% de disciplina de preço, 20% de crescimento de sortimento por cliente e 10% de execução de mix em clientes foco.
             </h3>
           </div>
 
@@ -882,23 +915,27 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
           </div>
 
           <div className="mt-4 overflow-hidden rounded-[1.2rem] border border-[var(--border)] bg-white/56">
-            <div className="grid grid-cols-[1.15fr_1.85fr] gap-0 border-b border-[var(--border)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
-              <p>Componente</p>
-              <p>Racional</p>
-            </div>
-            <div className="divide-y divide-[var(--border)]">
-              {incentiveComposition.map((item) => (
-                <div key={item.label} className="grid grid-cols-[1.15fr_1.85fr] items-center gap-0 px-4 py-3">
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className="h-2.5 w-2.5 shrink-0 rounded-full"
-                      style={{ backgroundColor: item.fill }}
-                    />
-                    <p className="font-display text-[0.95rem] font-medium text-[var(--ink)]">{item.label}</p>
-                  </div>
-                  <p className="text-[0.88rem] leading-5 text-[var(--ink-soft)]">{item.rationale}</p>
+            <div className="mobile-table-scroll">
+              <div className="mobile-table-inner">
+                <div className="grid grid-cols-[1.15fr_1.85fr] gap-0 border-b border-[var(--border)] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+                  <p>Componente</p>
+                  <p>Racional</p>
                 </div>
-              ))}
+                <div className="divide-y divide-[var(--border)]">
+                  {incentiveComposition.map((item) => (
+                    <div key={item.label} className="grid grid-cols-[1.15fr_1.85fr] items-center gap-0 px-4 py-3">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className="h-2.5 w-2.5 shrink-0 rounded-full"
+                          style={{ backgroundColor: item.fill }}
+                        />
+                        <p className="font-display text-[0.95rem] font-medium text-[var(--ink)]">{item.label}</p>
+                      </div>
+                      <p className="text-[0.88rem] leading-5 text-[var(--ink-soft)]">{item.rationale}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </article>
@@ -976,21 +1013,21 @@ export const deckSlides: DeckSlideDefinition[] = [
   {
     id: 'yoy-overview',
     label: 'YoY I',
-    agendaLabel: 'Análise de crescimento de vendas (YoY) - visão consolidada',
+    agendaLabel: 'Análise de crescimento de vendas (YoY) — visão consolidada',
     coverAgendaLabel: 'Análise de crescimento de vendas (YoY)',
     component: YoYOverviewSlide,
   },
   {
     id: 'yoy-drivers',
     label: 'YoY II',
-    agendaLabel: 'Análise de crescimento de vendas (YoY) - drivers por rede',
+    agendaLabel: 'Análise de crescimento de vendas (YoY) — drivers por rede',
     coverAgendaLabel: 'Análise de crescimento de vendas (YoY)',
     component: YoYDriversSlide,
   },
   {
     id: 'yoy-categories',
     label: 'YoY III',
-    agendaLabel: 'Análise de crescimento de vendas (YoY) - categorias',
+    agendaLabel: 'Análise de crescimento de vendas (YoY) — categorias',
     coverAgendaLabel: 'Análise de crescimento de vendas (YoY)',
     component: YoYCategoriesSlide,
   },

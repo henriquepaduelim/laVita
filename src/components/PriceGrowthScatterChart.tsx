@@ -130,13 +130,13 @@ export function PriceGrowthScatterChart({
               x={medianPrice}
               stroke={chartPalette.slate}
               strokeDasharray="4 4"
-              label={{ value: 'Mediana preço', position: 'insideTopRight', fill: '#44586b', fontSize: 11 }}
+              label={{ value: 'Mediana de preço', position: 'insideTopRight', fill: '#44586b', fontSize: 11 }}
             />
             <ReferenceLine
               y={medianGrowth}
               stroke={chartPalette.slate}
               strokeDasharray="4 4"
-              label={{ value: 'Mediana crescimento', position: 'insideTopLeft', fill: '#44586b', fontSize: 11 }}
+              label={{ value: 'Mediana de crescimento', position: 'insideTopLeft', fill: '#44586b', fontSize: 11 }}
             />
             <Scatter name="Base" data={baseData} shape={<BasePoint />} />
             <Scatter name="Redes destacadas" data={highlightedData} shape={<HighlightPoint />} />

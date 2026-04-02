@@ -39,10 +39,10 @@ export function KpiCard({
 }: KpiCardProps) {
   const compactClassName =
     tone === 'brand'
-      ? 'panel-interactive rounded-[1.3rem] border border-white/10 bg-[linear-gradient(180deg,rgba(160,30,28,0.98),rgba(128,20,18,0.94))] p-[0.9rem] text-white shadow-none'
+      ? 'panel-interactive rounded-[1.15rem] border border-white/10 bg-[linear-gradient(180deg,rgba(160,30,28,0.98),rgba(128,20,18,0.94))] p-[0.8rem] text-white shadow-none sm:rounded-[1.3rem] sm:p-[0.9rem]'
       : tone === 'muted'
-        ? 'panel-interactive rounded-[1.3rem] border border-[var(--border)] bg-[rgba(250,251,253,0.76)] p-[0.9rem] text-[var(--ink)] shadow-none'
-        : 'panel-interactive rounded-[1.3rem] border border-[var(--border)] bg-[rgba(255,255,255,0.62)] p-[0.9rem] text-[var(--ink)] shadow-none backdrop-blur-sm';
+        ? 'panel-interactive rounded-[1.15rem] border border-[var(--border)] bg-[rgba(250,251,253,0.76)] p-[0.8rem] text-[var(--ink)] shadow-none sm:rounded-[1.3rem] sm:p-[0.9rem]'
+        : 'panel-interactive rounded-[1.15rem] border border-[var(--border)] bg-[rgba(255,255,255,0.62)] p-[0.8rem] text-[var(--ink)] shadow-none backdrop-blur-sm sm:rounded-[1.3rem] sm:p-[0.9rem]';
 
   return (
     <article
@@ -53,21 +53,21 @@ export function KpiCard({
       } ${className}`.trim()}
     >
       <p
-        className={`font-display text-xs font-semibold uppercase tracking-[0.18em] ${
+        className={`font-display text-[0.68rem] font-semibold uppercase tracking-[0.17em] sm:text-xs sm:tracking-[0.18em] ${
           tone === 'brand' ? 'text-white/70' : 'text-[var(--ink-soft)]'
         }`}
       >
         {label}
       </p>
       <div
-        className={`font-display ${compact ? 'mt-3 text-[1.8rem] md:text-[2rem]' : 'mt-5 text-3xl md:text-4xl'} font-semibold tracking-tight ${
+        className={`font-display ${compact ? 'mt-2.5 text-[1.5rem] sm:mt-3 sm:text-[1.8rem] md:text-[2rem]' : 'mt-5 text-3xl md:text-4xl'} font-semibold tracking-tight ${
           tone === 'brand' ? 'text-white' : 'text-[var(--ink)]'
         }`}
       >
         {value}
       </div>
       <p
-        className={`mt-2 ${compact ? 'text-[0.84rem] leading-5' : 'text-base leading-7'} ${
+        className={`mt-2 ${compact ? 'text-[0.8rem] leading-5 sm:text-[0.84rem]' : 'text-base leading-7'} ${
           tone === 'brand' ? 'text-white/78' : 'text-[var(--ink-soft)]'
         }`}
       >

@@ -30,32 +30,32 @@ export function MetricStrip({ items, columns = 4 }: MetricStripProps) {
   const gridClassName = columns === 3 ? 'xl:grid-cols-3' : 'xl:grid-cols-4';
 
   return (
-    <div className="overflow-hidden rounded-[1.6rem] border border-[var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(248,250,252,0.92))] backdrop-blur-sm">
+    <div className="overflow-hidden rounded-[1.6rem] border border(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(248,250,252,0.92))] backdrop-blur-sm">
       <div className={`grid ${gridClassName}`}>
         {items.map((item, index) => (
           <div
             key={item.label}
             data-emphasis={item.emphasis ?? 'default'}
-            className={`metric-cell px-4 py-4 ${resolveTone(item.emphasis)} ${
+            className={`metric-cell px-3 py-3 sm:px-4 sm:py-4 ${resolveTone(item.emphasis)} ${
               index > 0 ? 'border-t border-[var(--border)] xl:border-t-0 xl:border-l' : ''
             } border-[var(--border)]`}
           >
             <p
-              className={`font-display text-[0.72rem] font-semibold uppercase tracking-[0.18em] ${
+              className={`font-display text-[0.68rem] font-semibold uppercase tracking-[0.16em] sm:text-[0.72rem] sm:tracking-[0.18em] ${
                 item.emphasis === 'brand' ? 'text-white/70' : 'text-[var(--ink-soft)]'
               }`}
             >
               {item.label}
             </p>
             <div
-              className={`font-display mt-3 text-[1.85rem] font-semibold tracking-tight ${
+              className={`font-display mt-2.5 text-[1.48rem] font-semibold tracking-tight sm:mt-3 sm:text-[1.85rem] ${
                 item.emphasis === 'brand' ? 'text-white' : 'text-[var(--ink)]'
               }`}
             >
               {item.value}
             </div>
             <p
-              className={`mt-2 text-[0.84rem] leading-5 ${
+              className={`mt-2 text-[0.8rem] leading-5 sm:text-[0.84rem] ${
                 item.emphasis === 'brand' ? 'text-white/76' : 'text-[var(--ink-soft)]'
               }`}
             >
