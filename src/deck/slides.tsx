@@ -398,8 +398,8 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
         ]}
       />
       <div className="mt-3 grid gap-3 xl:grid-cols-3">
-        <ChartCard compact title="Receita por categoria" description="2024 x 2025.">
-          <div className="h-[16rem] xl:h-[18rem]">
+        <ChartCard compact className="flex h-full flex-col" title="Receita por categoria" description="2024 x 2025.">
+          <div className="h-[17.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryRevenue].sort((left, right) => right.sales2025 - left.sales2025)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -413,8 +413,8 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
             </ResponsiveContainer>
           </div>
         </ChartCard>
-        <ChartCard compact title="Crescimento por categoria" description="Ranking percentual.">
-          <div className="h-[16rem] xl:h-[18rem]">
+        <ChartCard compact className="flex h-full flex-col" title="Crescimento por categoria" description="Ranking percentual.">
+          <div className="h-[17.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryGrowth].sort((left, right) => right.growthPct - left.growthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -426,8 +426,8 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
             </ResponsiveContainer>
           </div>
         </ChartCard>
-        <ChartCard compact title="Variação de preço" description="Variação % do preço médio por categoria.">
-          <div className="h-[16rem] xl:h-[18rem]">
+        <ChartCard compact className="flex h-full flex-col" title="Variação de preço" description="Variação % do preço médio por categoria.">
+          <div className="h-[17.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryPrice].sort((left, right) => right.priceGrowthPct - left.priceGrowthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -555,8 +555,8 @@ function YoYOverviewSlide({ index, total }: { index: number; total: number }) {
         </div>
 
         <div className="grid gap-4 content-start">
-          <ChartCard compact title="Mecânica do crescimento" description="2024 = base 100 — comparativo indexado por vetor.">
-          <div className="h-[14rem] xl:h-[16rem]">
+          <ChartCard compact className="flex h-full flex-col" title="Mecânica do crescimento" description="2024 = base 100 — comparativo indexado por vetor.">
+          <div className="h-[16rem] xl:h-[18rem]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={yoyComparison}
@@ -653,20 +653,25 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
       total={total}
     >
       <div className="grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
-        <ChartCard compact title="Principais impactos YoY por rede" description="Recorte dos maiores impactos absolutos por rede.">
-          <div className="h-[17rem] xl:h-[19rem]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={sortedDrivers} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
-                <CartesianGrid horizontal={false} />
-                <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatCompactCurrency(Number(value))} />
-                <YAxis type="category" dataKey="network" tickLine={false} axisLine={false} width={106} />
-                <ReferenceLine x={0} stroke={chartPalette.slate} strokeDasharray="3 3" />
-                <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string) => [formatSignedCurrency(Number(value)), 'Impacto']} labelFormatter={(label) => `Rede: ${label}`} />
-                <Bar dataKey="growthAbs" radius={[0, 8, 8, 0]}>
-                  {sortedDrivers.map((entry) => <Cell key={entry.network} fill={entry.growthAbs >= 0 ? chartPalette.success : chartPalette.red} />)}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+        <ChartCard compact className="flex h-full flex-col" title="Principais impactos YoY por rede" description="Recorte dos maiores impactos absolutos por rede.">
+          <div className="flex h-full min-h-[26rem] flex-col xl:min-h-0">
+            <div className="min-h-0 flex-1">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={sortedDrivers} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }} barCategoryGap={10}>
+                  <CartesianGrid horizontal={false} />
+                  <XAxis type="number" tickLine={false} axisLine={false} tickFormatter={(value: number | string) => formatCompactCurrency(Number(value))} />
+                  <YAxis type="category" dataKey="network" tickLine={false} axisLine={false} width={106} tick={{ fontSize: 12 }} />
+                  <ReferenceLine x={0} stroke={chartPalette.slate} strokeDasharray="3 3" />
+                  <Tooltip contentStyle={{ borderRadius: '1rem', border: '1px solid rgba(20,32,51,0.12)' }} formatter={(value: number | string) => [formatSignedCurrency(Number(value)), 'Impacto']} labelFormatter={(label) => `Rede: ${label}`} />
+                  <Bar dataKey="growthAbs" radius={[0, 8, 8, 0]} barSize={24}>
+                    {sortedDrivers.map((entry) => <Cell key={entry.network} fill={entry.growthAbs >= 0 ? chartPalette.success : chartPalette.red} />)}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="mt-3 border-t border-[var(--border)] pt-3 text-[0.9rem] leading-6 text-[var(--ink-soft)]">
+              <strong className="font-semibold text-[var(--ink)]">ST MARCHE</strong> respondeu pelo maior ganho absoluto do período, com <strong className="font-semibold text-[var(--success)]">{formatSignedCurrency(topPositive[0]?.growthAbs ?? 0)}</strong>.
+            </p>
           </div>
         </ChartCard>
         <div className="grid gap-4 content-start">
@@ -749,8 +754,8 @@ function YoYCategoriesSlide({ index, total }: { index: number; total: number }) 
         ]}
       />
       <div className="mt-4 grid gap-4 xl:grid-cols-2">
-        <ChartCard compact title="Impacto absoluto por categoria" description="Crescimento em R$ — quem mais contribuiu.">
-          <div className="h-[12.5rem] xl:h-[14.25rem]">
+        <ChartCard compact className="flex h-full flex-col" title="Impacto absoluto por categoria" description="Crescimento em R$ — quem mais contribuiu.">
+          <div className="h-[14.5rem] xl:h-[16.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={sortedByAbs} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -764,8 +769,8 @@ function YoYCategoriesSlide({ index, total }: { index: number; total: number }) 
             </ResponsiveContainer>
           </div>
         </ChartCard>
-        <ChartCard compact title="Crescimento % por categoria" description="Taxa de crescimento — quem cresceu mais rápido.">
-          <div className="h-[12.5rem] xl:h-[14.25rem]">
+        <ChartCard compact className="flex h-full flex-col" title="Crescimento % por categoria" description="Taxa de crescimento — quem cresceu mais rápido.">
+          <div className="h-[14.5rem] xl:h-[16.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={sortedByPct} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />

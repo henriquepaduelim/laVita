@@ -25,13 +25,13 @@ export function InsightBlock({
 }: InsightBlockProps) {
   if (compact) {
     return (
-      <article className={`group border-t border-[var(--border)] pt-2.5 transition-all duration-200 hover:border-[var(--border-strong)] hover:translate-x-[2px] ${className}`.trim()}>
+      <article className={`group flex h-full flex-col border-t border-[var(--border)] pt-2.5 transition-all duration-200 hover:border-[var(--border-strong)] hover:translate-x-[2px] ${className}`.trim()}>
         <div
           className={`inline-flex rounded-full px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] transition-colors duration-200 group-hover:saturate-125 ${accentClassNames[accent]}`}
         >
           {title}
         </div>
-        <div className="mt-2.5 text-[0.84rem] leading-5 text-[var(--ink-soft)]">{children}</div>
+        <div className="mt-2.5 flex-1 text-[0.84rem] leading-5 text-[var(--ink-soft)]">{children}</div>
       </article>
     );
   }

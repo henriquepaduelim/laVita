@@ -20,7 +20,7 @@ export function ChartCard({
     <article
       className={`${
         compact
-          ? 'panel-interactive rounded-[1.35rem] border border-[var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(250,251,253,0.86))] p-[0.85rem] shadow-none backdrop-blur-sm sm:rounded-[1.55rem] sm:p-[0.95rem]'
+          ? 'panel-interactive flex h-full flex-col rounded-[1.35rem] border border-[var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(250,251,253,0.86))] p-[0.9rem] shadow-none backdrop-blur-sm sm:rounded-[1.55rem] sm:p-[1rem]'
           : 'panel panel-interactive rounded-4xl p-6 md:p-7'
       } ${className}`.trim()}
     >
@@ -32,7 +32,7 @@ export function ChartCard({
           {description}
         </p>
       ) : null}
-      <div className={`chart-grid ${compact ? (description ? 'mt-3' : 'mt-2') : 'mt-6'}`}>{children}</div>
+      <div className={`chart-grid min-h-0 ${compact ? (description ? 'mt-3 flex-1' : 'mt-2 flex-1') : 'mt-6'}`}>{children}</div>
     </article>
   );
 }
