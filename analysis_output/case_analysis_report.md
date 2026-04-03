@@ -58,7 +58,7 @@
 - Maior ticket medio por loja ativa em 2025: `DALBEN` com R$ 183.874,13 por loja ativa.
 - Maior ticket medio por loja cadastrada em 2025: `DALBEN` com R$ 137.905,60 por loja cadastrada.
 - Maior volume em 2025: `GPA` com 1.668.495 itens.
-- Maior sortimento em 2025: `DAOLIO` com 29 SKUs distintos.
+- Maior sortimento em 2025: empate entre `CASA DELIZA`, `CUBATAO`, `DAOLIO`, `PONTO NOVO`, `SAVEGNAGO`, `VAREJO`, todos com 29 SKUs distintos.
 - Maior crescimento percentual entre clientes comparaveis (2024 > 0): `M.QUALIDADE` com 1525,12% sobre 2024.
 - Maior crescimento absoluto: `ST MARCHE` com aumento de R$ 1.321.707,87 em 2025 vs 2024.
 - Redes novas em 2025 com venda e sem base 2024: 14. A maior foi `PALATO` com R$ 56.229,54.
@@ -118,7 +118,7 @@
 - Nenhuma categoria apresentou queda absoluta de receita em 2025 vs 2024.
 
 #### Slide 3 - Recomendacoes analiticamente sustentadas
-- Priorizar expansão nas redes com crescimento acima da média e sortimento abaixo do teto de 52 SKUs, porque há espaço de mix sem depender apenas de preço.
+- Priorizar expansão nas redes com crescimento acima da média e sortimento abaixo do teto observado de 29 SKUs, porque há espaço de mix sem depender apenas de preço.
 - Tratar erosão de preço nas categorias com crescimento de volume, mas queda de receita/price, usando piso por categoria em vez de desconto linear por cliente.
 - Separar gestão de contas novas da gestão de contas comparáveis: clientes que entram em 2025 inflacionam leitura de crescimento percentual.
 - Monitorar ticket por loja com duas lentes: lojas cadastradas e lojas ativas. Quando a diferença é grande, o problema é cobertura de loja, não necessariamente sell-out.
@@ -127,14 +127,15 @@
 ### 5.5 Proposta de remuneracao variavel
 - Objetivo: remunerar crescimento com qualidade, sem premiar ganho de receita por desconto excessivo ou concentracao exagerada em poucos SKUs.
 - Estrutura sugerida de score trimestral por carteira:
-  - 50% `crescimento de volume`: variacao de quantidade vs mesmo periodo do ano anterior, comparando apenas base ativa/comparavel.
+  - 40% `crescimento de volume`: variacao de quantidade vs mesmo periodo do ano anterior, comparando apenas base ativa/comparavel.
   - 30% `disciplina de preco`: indice de preco realizado (`receita / quantidade`) contra meta por categoria e cliente, com gatilho minimo para impedir erosao de margem/posicionamento.
   - 20% `expansao de sortimento`: evolucao de SKUs distintos por cliente, limitada a SKUs elegiveis para evitar mix artificial.
+  - 10% `execucao de mix`: venda recorrente em clientes foco para reduzir concentracao excessiva em poucos itens.
 - Regras de governanca:
   - Gate 1: se o indice de preco ficar abaixo do piso, o componente de volume nao paga integralmente.
   - Gate 2: crescimento sobre base zero deve ser medido separadamente de clientes comparaveis, para nao distorcer incentivo.
   - Gate 3: sortimento so pontua se houver recorrencia minima, evitando venda pontual apenas para bater meta.
-- Exemplo de formula: `payout = target_bonus * (0,5*score_volume + 0,3*score_preco + 0,2*score_sortimento)`, com cada score truncado entre 0% e 120%.
+- Exemplo de formula: `payout = target_bonus * (0,4*score_volume + 0,3*score_preco + 0,2*score_sortimento + 0,1*score_mix)`, com cada score truncado entre 0% e 120%.
 - Vantagem tecnica: o modelo usa variaveis observaveis e auditaveis no proprio faturamento, sem depender de julgamento subjetivo.
 
 ## 6. Riscos de interpretacao e impacto

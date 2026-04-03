@@ -191,7 +191,10 @@ textarea:focus-visible {
 }
 
 .deck-canvas {
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(204, 45, 42, 0.045), transparent 26%),
+    radial-gradient(circle at 88% 10%, rgba(58, 143, 18, 0.035), transparent 24%),
+    linear-gradient(180deg, #fdfbf6 0%, #f4efe5 100%);
 }
 
 .deck-scroll {

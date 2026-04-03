@@ -40,7 +40,7 @@
 ## 5. Analise Comparativa Por Cliente
 - Maior ticket medio por loja: `DALBEN` com `R$ 183.874,13`.
 - Maior volume de itens em 2025: `GPA` com `1.668.495` unidades.
-- Maior sortimento em 2025: `DAOLIO` com `29` SKUs.
+- Maior sortimento em 2025: empate entre `CASA DELIZA`, `CUBATAO`, `DAOLIO`, `PONTO NOVO`, `SAVEGNAGO`, `VAREJO` com `29` SKUs.
 - Maior crescimento comparavel em 2025: `M.QUALIDADE` com `1525,12%`.
 - Rede com maior preco medio em 2025: `DB` com `R$ 4,41`.
 - A rede de maior crescimento foi `M.QUALIDADE` com preco medio de `R$ 3,65`. Mesmo cliente com maior preco medio: `false`.
@@ -73,7 +73,7 @@
 - `OUTRAS REGIOES`: delta `R$ -32.654,12` | crescimento `n/a`.
 ### Bloco 3 - Recomendacoes
 - Replicar alavancas das redes comparaveis que cresceram com preco sustentado.
-- Expandir sortimento nas redes medias com boa base de volume e baixa diversidade de SKU.
+- Expandir sortimento nas redes medias com boa base de volume e baixa diversidade de SKU, tomando `29 SKUs` como teto observado da base vendida.
 - Separar clientes novos da analise de crescimento organico.
 - Monitorar erosao de preco em contas que crescem abaixo do mercado ou perdem receita.
 

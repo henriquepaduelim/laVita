@@ -80,7 +80,7 @@ export function SlideDeck() {
       </div>
 
       {/* Main slide — fills full viewport */}
-      <main id="deck-main" className="h-full">
+      <main id="deck-main" className="h-full min-h-0">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={activeSlide.id}
@@ -96,7 +96,7 @@ export function SlideDeck() {
               if (info.offset.x < -80 || info.velocity.x < -400) goToSlide(activeIndex + 1);
               if (info.offset.x > 80 || info.velocity.x > 400) goToSlide(activeIndex - 1);
             }}
-            className="h-full"
+            className="h-full min-h-0"
           >
             <activeSlide.component index={activeIndex} total={deckSlides.length} />
           </motion.div>

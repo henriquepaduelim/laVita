@@ -379,6 +379,12 @@ def build_report(
     top_ticket = network_table.sort_values("ticket_per_store_2025", ascending=False).iloc[0]
     top_volume = network_table.sort_values("volume_2025", ascending=False).iloc[0]
     top_assortment = network_table.sort_values("assortment_2025", ascending=False).iloc[0]
+    top_assortment_ties = network_table[
+        (network_table["revenue_2025"].fillna(0) > 0)
+        & (
+        network_table["assortment_2025"] == top_assortment["assortment_2025"]
+        )
+    ].sort_values("network")
     top_growth = comparable.sort_values("revenue_growth_pct", ascending=False).iloc[0]
     top_categories = category_table.head(6)
 
@@ -440,9 +446,15 @@ def build_report(
     lines.append(
         f"- Maior volume de itens em 2025: `{top_volume['network']}` com `{fmt_number(top_volume['volume_2025'])}` unidades."
     )
-    lines.append(
-        f"- Maior sortimento em 2025: `{top_assortment['network']}` com `{fmt_number(top_assortment['assortment_2025'])}` SKUs."
-    )
+    assortment_networks = [f"`{network}`" for network in top_assortment_ties["network"].tolist()]
+    if len(assortment_networks) == 1:
+        lines.append(
+            f"- Maior sortimento em 2025: {assortment_networks[0]} com `{fmt_number(top_assortment['assortment_2025'])}` SKUs."
+        )
+    else:
+        lines.append(
+            f"- Maior sortimento em 2025: empate entre {', '.join(assortment_networks)} com `{fmt_number(top_assortment['assortment_2025'])}` SKUs."
+        )
     lines.append(
         f"- Maior crescimento comparavel em 2025: `{top_growth['network']}` com `{fmt_pct(top_growth['revenue_growth_pct'])}`."
     )
@@ -481,7 +493,7 @@ def build_report(
         )
     lines.append("### Bloco 3 - Recomendacoes")
     lines.append("- Replicar alavancas das redes comparaveis que cresceram com preco sustentado.")
-    lines.append("- Expandir sortimento nas redes medias com boa base de volume e baixa diversidade de SKU.")
+    lines.append("- Expandir sortimento nas redes medias com boa base de volume e baixa diversidade de SKU, tomando `29 SKUs` como teto observado da base vendida.")
     lines.append("- Separar clientes novos da analise de crescimento organico.")
     lines.append("- Monitorar erosao de preco em contas que crescem abaixo do mercado ou perdem receita.")
     lines.append("")
@@ -528,9 +540,13 @@ def main() -> None:
         .head(10)
         .to_dict(orient="records"),
         "top_volume_2025": network_table.sort_values("volume_2025", ascending=False).head(10).to_dict(orient="records"),
-        "top_assortment_2025": network_table.sort_values("assortment_2025", ascending=False)
-        .head(10)
-        .to_dict(orient="records"),
+        "top_assortment_2025": network_table[
+            (network_table["revenue_2025"].fillna(0) > 0)
+            & (
+                network_table["assortment_2025"]
+                == network_table.loc[network_table["revenue_2025"].fillna(0) > 0, "assortment_2025"].max()
+            )
+        ].sort_values("network").to_dict(orient="records"),
         "top_growth_comparable_2025": network_table[network_table["revenue_2024"].fillna(0) > 0]
         .sort_values("revenue_growth_pct", ascending=False)
         .head(10)

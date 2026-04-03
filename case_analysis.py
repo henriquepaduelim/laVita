@@ -353,7 +353,7 @@ pareto_store.to_csv(OUT_DIR / 'pareto_store_2025.csv', index=False)
 
 # Recommendations based on data
 recommendations = [
-    'Priorizar expansão nas redes com crescimento acima da média e sortimento abaixo do teto de 52 SKUs, porque há espaço de mix sem depender apenas de preço.',
+    'Priorizar expansão nas redes com crescimento acima da média e sortimento abaixo do teto observado de 29 SKUs, porque há espaço de mix sem depender apenas de preço.',
     'Tratar erosão de preço nas categorias com crescimento de volume, mas queda de receita/price, usando piso por categoria em vez de desconto linear por cliente.',
     'Separar gestão de contas novas da gestão de contas comparáveis: clientes que entram em 2025 inflacionam leitura de crescimento percentual.',
     'Monitorar ticket por loja com duas lentes: lojas cadastradas e lojas ativas. Quando a diferença é grande, o problema é cobertura de loja, não necessariamente sell-out.',
@@ -414,7 +414,12 @@ append('### 5.2 Analise comparativa por cliente (rede)')
 append(f"- Maior ticket medio por loja ativa em 2025: `{best_ticket_active['network']}` com {fmt_money(best_ticket_active['ticket_active_2025'])} por loja ativa.")
 append(f"- Maior ticket medio por loja cadastrada em 2025: `{best_ticket_registered['network']}` com {fmt_money(best_ticket_registered['ticket_registered_2025'])} por loja cadastrada.")
 append(f"- Maior volume em 2025: `{best_volume['network']}` com {fmt_int(best_volume['qty_2025'])} itens.")
-append(f"- Maior sortimento em 2025: `{best_sort['network']}` com {fmt_int(best_sort['sort_2025'])} SKUs distintos.")
+sort_ties = network_df[(network_df['sales_2025'] > 0) & (network_df['sort_2025'] == best_sort['sort_2025'])].sort_values('network')
+sort_ties_label = ', '.join(f"`{network}`" for network in sort_ties['network'].tolist())
+if len(sort_ties) == 1:
+    append(f"- Maior sortimento em 2025: {sort_ties_label} com {fmt_int(best_sort['sort_2025'])} SKUs distintos.")
+else:
+    append(f"- Maior sortimento em 2025: empate entre {sort_ties_label}, todos com {fmt_int(best_sort['sort_2025'])} SKUs distintos.")
 append(f"- Maior crescimento percentual entre clientes comparaveis (2024 > 0): `{best_growth_pct['network']}` com {fmt_pct(best_growth_pct['growth_pct'])} sobre 2024.")
 append(f"- Maior crescimento absoluto: `{best_growth_abs['network']}` com aumento de {fmt_money(best_growth_abs['growth_abs'])} em 2025 vs 2024.")
 append(f"- Redes novas em 2025 com venda e sem base 2024: {fmt_int(len(new_networks))}. A maior foi `{new_networks.iloc[0]['network']}` com {fmt_money(new_networks.iloc[0]['sales_2025'])}." if len(new_networks) else '- Nao houve redes novas em 2025 sem base 2024.')
@@ -467,14 +472,15 @@ append('')
 append('### 5.5 Proposta de remuneracao variavel')
 append('- Objetivo: remunerar crescimento com qualidade, sem premiar ganho de receita por desconto excessivo ou concentracao exagerada em poucos SKUs.')
 append('- Estrutura sugerida de score trimestral por carteira:')
-append('  - 50% `crescimento de volume`: variacao de quantidade vs mesmo periodo do ano anterior, comparando apenas base ativa/comparavel.')
+append('  - 40% `crescimento de volume`: variacao de quantidade vs mesmo periodo do ano anterior, comparando apenas base ativa/comparavel.')
 append('  - 30% `disciplina de preco`: indice de preco realizado (`receita / quantidade`) contra meta por categoria e cliente, com gatilho minimo para impedir erosao de margem/posicionamento.')
 append('  - 20% `expansao de sortimento`: evolucao de SKUs distintos por cliente, limitada a SKUs elegiveis para evitar mix artificial.')
+append('  - 10% `execucao de mix`: venda recorrente em clientes foco para reduzir concentracao excessiva em poucos itens.')
 append('- Regras de governanca:')
 append('  - Gate 1: se o indice de preco ficar abaixo do piso, o componente de volume nao paga integralmente.')
 append('  - Gate 2: crescimento sobre base zero deve ser medido separadamente de clientes comparaveis, para nao distorcer incentivo.')
 append('  - Gate 3: sortimento so pontua se houver recorrencia minima, evitando venda pontual apenas para bater meta.')
-append('- Exemplo de formula: `payout = target_bonus * (0,5*score_volume + 0,3*score_preco + 0,2*score_sortimento)`, com cada score truncado entre 0% e 120%.')
+append('- Exemplo de formula: `payout = target_bonus * (0,4*score_volume + 0,3*score_preco + 0,2*score_sortimento + 0,1*score_mix)`, com cada score truncado entre 0% e 120%.')
 append('- Vantagem tecnica: o modelo usa variaveis observaveis e auditaveis no proprio faturamento, sem depender de julgamento subjetivo.')
 append('')
 append('## 6. Riscos de interpretacao e impacto')

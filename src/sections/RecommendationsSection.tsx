@@ -20,7 +20,7 @@ export function RecommendationsSection({
         <InsightBlock title="1. Expandir sortimento" accent="brand">
           <p>
             Expandir sortimento em contas médias com volume relevante, mas mix
-            abaixo do teto de SKUs ativos.
+            abaixo do teto observado de 29 SKUs na base vendida.
           </p>
         </InsightBlock>
         <InsightBlock title="2. Proteger preço" accent="danger">

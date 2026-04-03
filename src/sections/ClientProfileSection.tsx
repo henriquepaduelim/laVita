@@ -31,6 +31,15 @@ export function ClientProfileSection({
   animated = true,
 }: ClientProfileSectionProps) {
   const { overview, references, scatter } = reportData;
+  const sortLeadersLabel = overview.highestSortNetworks.length > 1
+    ? `${formatNumber(overview.highestSortNetworks.length)} redes`
+    : overview.highestSortNetworks[0];
+  const sortLeadersDetail = overview.highestSortNetworks.length > 1
+    ? `empate em ${formatNumber(overview.highestSortValue)} SKUs.`
+    : `${formatNumber(overview.highestSortValue)} SKUs distintos em 2025.`;
+  const sortLeadersNote = overview.highestSortNetworks.length > 1
+    ? `Teto observado em ${overview.highestSortNetworks.join(', ')}. Por isso, sortimento discrimina pouco as contas mais maduras.`
+    : 'O teto vendido na base é 29 SKUs, então a métrica perde poder discriminatório entre contas já muito maduras.';
 
   return (
     <SectionShell
@@ -56,10 +65,10 @@ export function ClientProfileSection({
           tone="default"
         />
         <KpiCard
-          label="Maior sortimento"
-          value={references.daolio.network}
-          detail={`${formatNumber(references.daolio.sort2025)} SKUs distintos em 2025.`}
-          note="O teto vendido na base é 29 SKUs, então a métrica perde poder discriminatório entre contas já muito maduras."
+          label={overview.highestSortNetworks.length > 1 ? 'Teto de sortimento' : 'Maior sortimento'}
+          value={sortLeadersLabel}
+          detail={sortLeadersDetail}
+          note={sortLeadersNote}
           tone="muted"
         />
         <KpiCard

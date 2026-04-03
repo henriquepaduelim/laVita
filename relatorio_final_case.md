@@ -149,7 +149,7 @@ Resultado:
 #### 6.3 Sortimento
 Resultado:
 
-- maior sortimento em 2025: `DAOLIO`
+- maior sortimento em 2025: empate entre `CASA DELIZA`, `CUBATAO`, `DAOLIO`, `PONTO NOVO`, `SAVEGNAGO` e `VAREJO`
 - total: `29` SKUs
 
 Observação:
@@ -269,7 +269,7 @@ Ou seja, houve expansão de vendas, mas sem aumento relevante de mix e com contr
 #### 8.4 Recomendações Prioritárias
 Com base na leitura dos dados, as prioridades sugeridas são:
 
-1. Expandir sortimento em contas médias com volume relevante, mas mix abaixo do teto de SKUs ativos.
+1. Expandir sortimento em contas médias com volume relevante, mas mix abaixo do teto observado de 29 SKUs na base vendida.
 2. Proteger preço nas categorias em que o volume cresce, mas o preço médio cai, especialmente `IN NATURA` e `COUVE`.
 3. Tratar separadamente contas novas e contas comparáveis, para evitar distorção na leitura de performance.
 4. Replicar padrões comerciais das redes que cresceram com manutenção de preço médio saudável.

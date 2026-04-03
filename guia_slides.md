@@ -188,12 +188,13 @@ Soma da coluna QUANTIDADE
 ### CARD 3 — Sortimento (cor: laranja)
 
 ```
-MAIOR SORTIMENTO
+TETO DE SORTIMENTO
 ─────────────────────
-Vencedor:   DAOLIO
-Valor:      29 SKUs
-Detalhe:    Teto do portfólio vendido: 29 SKUs
-            Vários clientes atingiram o teto
+Valor:      6 redes
+Detalhe:    empate em 29 SKUs
+Observação: CASA DELIZA, CUBATAO, DAOLIO,
+            PONTO NOVO, SAVEGNAGO e VAREJO
+            atingiram o teto observado
             → métrica tem baixo poder
               discriminatório no topo
 ─────────────────────
