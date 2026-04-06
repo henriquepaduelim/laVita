@@ -1,6 +1,5 @@
 import methodologyRaw from '../../presentation_assets/source_data/s02_methodology_table.csv?raw';
 import qualityRaw from '../../presentation_assets/source_data/s02_quality_snapshot.csv?raw';
-import paretoRaw from '../../presentation_assets/source_data/s03_pareto_chart.csv?raw';
 import scatterRaw from '../../presentation_assets/source_data/s05_price_vs_growth.csv?raw';
 import categoryRevenueRaw from '../../presentation_assets/source_data/s06_category_revenue.csv?raw';
 import categoryGrowthRaw from '../../presentation_assets/source_data/s06_category_growth.csv?raw';
@@ -35,14 +34,6 @@ const qualitySnapshot = parseCsv<QualitySnapshotRow>(qualityRaw, (row) => ({
   indicator: row.Indicador,
   value: row.Valor,
   note: row.Observacao,
-}));
-
-const pareto = parseCsv<ParetoRow>(paretoRaw, (row) => ({
-  network: row.network,
-  sales2025: toNumber(row.sales_2025),
-  share: toNumber(row.share),
-  cumulativeShare: toNumber(row.cum_share),
-  isClassA: row.is_class_a === 'True',
 }));
 
 const scatter = parseCsv<PriceGrowthRow>(scatterRaw, (row) => ({
@@ -119,6 +110,52 @@ const overallByMetric = Object.fromEntries(
   overallMetrics.map((row) => [row.metric, row]),
 );
 
+function buildParetoRows(
+  rows: NetworkMetricsRow[],
+  salesKey: 'sales2024' | 'sales2025',
+): ParetoRow[] {
+  const rankedRows = rows
+    .filter((row) => row[salesKey] > 0)
+    .sort((left, right) => right[salesKey] - left[salesKey]);
+
+  const totalSales = rankedRows.reduce((accumulator, row) => accumulator + row[salesKey], 0);
+  let cumulativeShare = 0;
+  const detailedRows = rankedRows.map((row) => {
+    const share = totalSales > 0 ? row[salesKey] / totalSales : 0;
+    const previousCumulativeShare = cumulativeShare;
+    cumulativeShare += share;
+
+    return {
+      network: row.network,
+      sales: row[salesKey],
+      share,
+      cumulativeShare,
+      isClassA: previousCumulativeShare < 0.8,
+    };
+  });
+
+  const classARows = detailedRows.filter((row) => row.isClassA);
+  const tailRows = detailedRows.filter((row) => !row.isClassA);
+
+  if (tailRows.length === 0) {
+    return classARows;
+  }
+
+  const tailSales = tailRows.reduce((accumulator, row) => accumulator + row.sales, 0);
+  const tailShare = tailRows.reduce((accumulator, row) => accumulator + row.share, 0);
+
+  return [
+    ...classARows,
+    {
+      network: 'Demais redes',
+      sales: tailSales,
+      share: tailShare,
+      cumulativeShare: 1,
+      isClassA: false,
+    },
+  ];
+}
+
 const activeNetworks = networkMetrics.filter((row) => row.sales2025 > 0);
 const comparableScatter = scatter.filter(
   (row) => isFiniteNumber(row.price2025) && isFiniteNumber(row.growthPct),
@@ -129,6 +166,10 @@ const categoryRevenueActive = categoryRevenue.filter((row) => row.sales2025 > 0)
 const categoryGrowthActive = categoryGrowth.filter((row) => isFiniteNumber(row.growthPct));
 const categoryPriceActive = categoryPrice.filter((row) => isFiniteNumber(row.price2025));
 const categoryImpactActive = categoryImpact.filter((row) => isFiniteNumber(row.growthPct));
+const paretoByYear = {
+  '2024': buildParetoRows(networkMetrics, 'sales2024'),
+  '2025': buildParetoRows(networkMetrics, 'sales2025'),
+} as const;
 
 const networkByName = Object.fromEntries(
   activeNetworks.map((row) => [row.network, row]),
@@ -153,7 +194,8 @@ const maxSort = Math.max(...activeNetworks.map((row) => row.sort2025));
 const highestSortNetworks = activeNetworks
   .filter((row) => row.sort2025 === maxSort)
   .map((row) => row.network);
-const paretoClassA = pareto.filter((row) => row.isClassA);
+const pareto2025 = paretoByYear['2025'];
+const paretoClassA = pareto2025.filter((row) => row.isClassA);
 const topCategory = [...categoryRevenueActive].sort(
   (left, right) => right.sales2025 - left.sales2025,
 )[0];
@@ -217,7 +259,8 @@ export const reportData = {
   },
   methodology,
   qualitySnapshot,
-  pareto,
+  pareto: pareto2025,
+  paretoByYear,
   scatter: comparableScatter,
   categoryRevenue: categoryRevenueActive,
   categoryGrowth: categoryGrowthActive,

@@ -12,7 +12,7 @@ export type QualitySnapshotRow = {
 
 export type ParetoRow = {
   network: string;
-  sales2025: number;
+  sales: number;
   share: number;
   cumulativeShare: number;
   isClassA: boolean;
