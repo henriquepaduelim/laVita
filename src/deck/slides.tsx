@@ -31,6 +31,7 @@ export type DeckSlideDefinition = {
   label: string;
   agendaLabel?: string;
   coverAgendaLabel?: string;
+  hideFromAgenda?: boolean;
   component: (props: { index: number; total: number }) => ReactElement;
 };
 
@@ -49,6 +50,7 @@ function buildCoverAgendaItems(slides: DeckSlideDefinition[]) {
   const items: { id: string; label: string }[] = [];
 
   slides.slice(1).forEach((slide) => {
+    if (slide.hideFromAgenda) return;
     const label = slide.coverAgendaLabel ?? slide.agendaLabel ?? slide.label;
     const previous = items.at(-1);
 
@@ -1112,5 +1114,6 @@ export const deckSlides: DeckSlideDefinition[] = [
     agendaLabel: 'Proposta - Modelo de Remuneração Variável',
     coverAgendaLabel: 'Proposta - Modelo de Remuneração Variável',
     component: RemunerationSlide,
-  }
+  },
+  { id: 'thanks', label: 'Obrigado', hideFromAgenda: true, component: ThankYouSlide },
 ];
