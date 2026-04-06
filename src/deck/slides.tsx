@@ -365,7 +365,7 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
             <li className="flex gap-3">
               <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-[#1a5c28]" />
               <p>
-                O sortimento chegou ao teto em <strong className="font-semibold">{formatNumber(overview.highestSortValue)} SKUs</strong> em poucas redes. Acima desse patamar, a métrica perde capacidade de diferenciar o desempenho.
+                Seis redes atingiram o teto de <strong className="font-semibold">{formatNumber(overview.highestSortValue)} SKUs</strong>: <strong className="font-semibold">CASA DELIZA, CUBATAO, DAOLIO, PONTO NOVO, SAVEGNAGO</strong> e <strong className="font-semibold">VAREJO</strong>.
               </p>
             </li>
             <li className="flex gap-3">
