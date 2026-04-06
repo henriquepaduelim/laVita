@@ -1002,7 +1002,7 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
             Por que esse modelo
           </p>
           <p className="mt-3 text-[0.88rem] leading-[1.56] text-[var(--ink-soft)]">
-            O crescimento de 2025 foi expressivo, mas veio concentrado em poucas redes e em parte sustentado por queda de preço. Um modelo que remunera só volume incentiva exatamente esse caminho — mais pedido, menos margem.
+            O crescimento de 2025 foi expressivo, mas veio concentrado em poucas redes e em parte sustentado por queda de preço. Um modelo que remunera só volume incentiva exatamente esse caminho: mais pedido, menos margem.
           </p>
           <div className="mt-4 space-y-3.5">
             {[
