@@ -1112,6 +1112,5 @@ export const deckSlides: DeckSlideDefinition[] = [
     agendaLabel: 'Proposta - Modelo de Remuneração Variável',
     coverAgendaLabel: 'Proposta - Modelo de Remuneração Variável',
     component: RemunerationSlide,
-  },
-  { id: 'thanks', label: 'Obrigado', component: ThankYouSlide },
+  }
 ];
