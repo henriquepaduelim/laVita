@@ -91,7 +91,7 @@ export function PriceGrowthScatterChart({
   const HighlightPoint = makeHighlightPoint(minS, maxS);
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
+    <div className="flex h-full min-h-0 min-w-0 w-full max-w-full flex-col">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--ink-soft)]">
         <p>Tamanho da bolha proporcional à receita 2025.</p>
         <div className="flex items-center gap-4">
@@ -106,7 +106,7 @@ export function PriceGrowthScatterChart({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1">
+      <div className="min-h-0 min-w-0 w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 18, right: 34, left: 4, bottom: 8 }}>
             <CartesianGrid />

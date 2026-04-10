@@ -242,15 +242,14 @@ textarea:focus-visible {
 }
 
 @media (max-width: 767px) {
+  /* Recharts + flex: sem min-width forçado — senão o card fica mais largo que a viewport */
   .chart-grid {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
     padding-bottom: 0.2rem;
-  }
-
-  .chart-grid > div {
-    min-width: 29rem;
   }
 
   .eyebrow {

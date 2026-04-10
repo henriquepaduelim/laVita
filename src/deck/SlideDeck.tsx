@@ -99,7 +99,7 @@ export function SlideDeck() {
               if (info.offset.x < -80 || info.velocity.x < -400) goToSlide(activeIndex + 1);
               if (info.offset.x > 80 || info.velocity.x > 400) goToSlide(activeIndex - 1);
             }}
-            className="w-full max-md:min-h-min md:h-full md:min-h-0"
+            className="w-full min-w-0 max-w-full max-md:min-h-min md:h-full md:min-h-0"
           >
             <activeSlide.component index={activeIndex} total={deckSlides.length} />
           </motion.div>

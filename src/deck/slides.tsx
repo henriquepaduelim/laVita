@@ -260,7 +260,7 @@ function ParetoSlide({ index, total }: { index: number; total: number }) {
                 </select>
               </label>
             </div>
-            <div className="min-h-0 flex-1">
+            <div className="min-h-0 min-w-0 w-full flex-1">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={paretoChartData} margin={{ top: 10, right: 16, left: 8, bottom: 16 }}>
                   <CartesianGrid vertical={false} />
@@ -340,7 +340,7 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
       />
       <div className="mt-5 grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
         <ChartCard compact title="Preço médio x crescimento por rede" description="Cada ponto é uma rede.">
-          <div className="h-[16rem] max-md:h-[14rem] xl:h-[19rem]">
+          <div className="h-[16rem] max-w-full min-w-0 max-md:h-[14rem] xl:h-[19rem]">
             <PriceGrowthScatterChart
               data={scatter}
               medianPrice={overview.scatterMedianPrice}
@@ -429,7 +429,7 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
       />
       <div className="mt-3 grid gap-3 xl:grid-cols-3">
         <ChartCard compact className="flex h-full flex-col" title="Receita por categoria" description="2024 x 2025.">
-          <div className="h-[17.5rem] max-md:h-[13.5rem] xl:h-[19.5rem]">
+          <div className="h-[17.5rem] max-w-full min-w-0 max-md:h-[13.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryRevenue].sort((left, right) => right.sales2025 - left.sales2025)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -467,7 +467,7 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
           </div>
         </ChartCard>
         <ChartCard compact className="flex h-full flex-col" title="Crescimento por categoria" description="Ranking percentual.">
-          <div className="h-[17.5rem] max-md:h-[13.5rem] xl:h-[19.5rem]">
+          <div className="h-[17.5rem] max-w-full min-w-0 max-md:h-[13.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryGrowth].sort((left, right) => right.growthPct - left.growthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -480,7 +480,7 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
           </div>
         </ChartCard>
         <ChartCard compact className="flex h-full flex-col" title="Variação de preço" description="Variação % do preço médio por categoria.">
-          <div className="h-[17.5rem] max-md:h-[13.5rem] xl:h-[19.5rem]">
+          <div className="h-[17.5rem] max-w-full min-w-0 max-md:h-[13.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryPrice].sort((left, right) => right.priceGrowthPct - left.priceGrowthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -625,7 +625,7 @@ function YoYOverviewSlide({ index, total }: { index: number; total: number }) {
 
         <div className="grid gap-4 content-start">
           <ChartCard compact className="flex h-full flex-col" title="Mecânica do crescimento" description="Base 2024 = 100, comparativo por dimensão.">
-          <div className="h-[16rem] max-md:h-[14rem] xl:h-[18rem]">
+          <div className="h-[16rem] max-w-full min-w-0 max-md:h-[14rem] xl:h-[18rem]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={yoyComparison}
@@ -745,7 +745,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
       <div className="grid gap-5 xl:grid-cols-[1.08fr_0.92fr]">
         <ChartCard compact className="flex h-full flex-col" title="Top 5 impulsionadores e detratores por rede" description="Impacto absoluto em receita vs. 2024.">
           <div className="flex h-full min-h-[26rem] max-md:min-h-[19rem] flex-col xl:min-h-0">
-            <div className="min-h-0 flex-1">
+            <div className="min-h-0 min-w-0 w-full flex-1">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={driverHighlights} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }} barCategoryGap={10}>
                   <CartesianGrid horizontal={false} />
@@ -766,7 +766,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
         </ChartCard>
         <div className="grid gap-4 content-start">
           <ChartCard compact className="flex h-full flex-col" title="Top 5 categorias por impacto" description="Contribuição absoluta para o crescimento de receita.">
-            <div className="h-[14rem] max-md:h-[12rem] xl:h-[15rem]">
+            <div className="h-[14rem] max-w-full min-w-0 max-md:h-[12rem] xl:h-[15rem]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topCategoryImpact} layout="vertical" margin={{ top: 6, right: 10, left: 12, bottom: 6 }}>
                   <CartesianGrid horizontal={false} />
@@ -938,7 +938,7 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
             Estrutura de pesos
           </p>
 
-          <div className="chart-grid mt-3 h-[4.5rem]">
+          <div className="chart-grid mt-3 h-[4.5rem] min-w-0 w-full max-w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={stackedComposition}

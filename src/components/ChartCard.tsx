@@ -32,7 +32,11 @@ export function ChartCard({
           {description}
         </p>
       ) : null}
-      <div className={`chart-grid min-h-0 ${compact ? (description ? 'mt-3 flex flex-1 flex-col' : 'mt-2 flex flex-1 flex-col') : 'mt-6'}`}>{children}</div>
+      <div
+        className={`chart-grid min-h-0 w-full min-w-0 max-w-full ${compact ? (description ? 'mt-3 flex flex-1 flex-col' : 'mt-2 flex flex-1 flex-col') : 'mt-6'}`}
+      >
+        {children}
+      </div>
     </article>
   );
 }
