@@ -74,16 +74,16 @@ function CoverSlide({ index, total }: { index: number; total: number }) {
       total={total}
       hideHeader
     >
-      <div className="flex h-full min-h-0 flex-col gap-4">
+      <div className="flex h-full min-h-0 flex-col gap-4 max-md:gap-3">
         <div className="shrink-0">
           <img
             src={lavitaLogo}
             alt="La Vita"
-            className="h-auto w-[10.5rem] object-contain"
+            className="h-auto w-[10.5rem] max-md:w-[8.25rem] object-contain"
           />
         </div>
 
-        <div className="grid min-h-0 flex-1 gap-8 xl:grid-cols-[1.04fr_0.96fr]">
+        <div className="grid min-h-0 flex-1 gap-8 max-md:gap-5 xl:grid-cols-[1.04fr_0.96fr]">
           {/* Left: headline + stats */}
           <div className="flex h-full min-h-0 flex-col pb-4 pt-1">
             <div className="flex items-center justify-between gap-3 pb-3 border-b border-[var(--border)]">
@@ -95,7 +95,7 @@ function CoverSlide({ index, total }: { index: number; total: number }) {
               </p>
             </div>
             <div className="mt-6 max-w-[52rem]">
-              <h1 className="font-display text-[2rem] font-semibold leading-[1.02] tracking-[-0.025em] text-[var(--ink)] lg:max-w-[18ch] lg:text-[2.45rem] xl:text-[2.7rem]">
+              <h1 className="font-display text-[2rem] font-semibold leading-[1.02] tracking-[-0.025em] text-[var(--ink)] max-md:text-[1.62rem] max-md:leading-[1.08] lg:max-w-[18ch] lg:text-[2.45rem] xl:text-[2.7rem]">
                 2025 cresceu com volume, mas a receita segue concentrada em poucas redes.
               </h1>
               <p className="mt-3 max-w-[36rem] text-[0.92rem] leading-6 text-[var(--ink-soft)] lg:text-[0.98rem]">
@@ -245,7 +245,7 @@ function ParetoSlide({ index, total }: { index: number; total: number }) {
         </div>
 
         {/* Right column — chart fills height */}
-        <div className="flex h-full min-h-0 flex-col">
+        <div className="flex h-full min-h-0 max-md:min-h-[15.5rem] flex-col">
           <ChartCard compact title="Curva ABC de faturamento" description="Receita por rede e participação acumulada.">
             <div className="mb-2 flex items-center justify-end">
               <label className="flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
@@ -340,7 +340,7 @@ function ClientSlide({ index, total }: { index: number; total: number }) {
       />
       <div className="mt-5 grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
         <ChartCard compact title="Preço médio x crescimento por rede" description="Cada ponto é uma rede.">
-          <div className="h-[16rem] xl:h-[19rem]">
+          <div className="h-[16rem] max-md:h-[14rem] xl:h-[19rem]">
             <PriceGrowthScatterChart
               data={scatter}
               medianPrice={overview.scatterMedianPrice}
@@ -429,7 +429,7 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
       />
       <div className="mt-3 grid gap-3 xl:grid-cols-3">
         <ChartCard compact className="flex h-full flex-col" title="Receita por categoria" description="2024 x 2025.">
-          <div className="h-[17.5rem] xl:h-[19.5rem]">
+          <div className="h-[17.5rem] max-md:h-[13.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryRevenue].sort((left, right) => right.sales2025 - left.sales2025)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -467,7 +467,7 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
           </div>
         </ChartCard>
         <ChartCard compact className="flex h-full flex-col" title="Crescimento por categoria" description="Ranking percentual.">
-          <div className="h-[17.5rem] xl:h-[19.5rem]">
+          <div className="h-[17.5rem] max-md:h-[13.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryGrowth].sort((left, right) => right.growthPct - left.growthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -480,7 +480,7 @@ function CategorySlide({ index, total }: { index: number; total: number }) {
           </div>
         </ChartCard>
         <ChartCard compact className="flex h-full flex-col" title="Variação de preço" description="Variação % do preço médio por categoria.">
-          <div className="h-[17.5rem] xl:h-[19.5rem]">
+          <div className="h-[17.5rem] max-md:h-[13.5rem] xl:h-[19.5rem]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[...categoryPrice].sort((left, right) => right.priceGrowthPct - left.priceGrowthPct)} layout="vertical" margin={{ top: 6, right: 10, left: 8, bottom: 6 }}>
                 <CartesianGrid horizontal={false} />
@@ -625,7 +625,7 @@ function YoYOverviewSlide({ index, total }: { index: number; total: number }) {
 
         <div className="grid gap-4 content-start">
           <ChartCard compact className="flex h-full flex-col" title="Mecânica do crescimento" description="Base 2024 = 100, comparativo por dimensão.">
-          <div className="h-[16rem] xl:h-[18rem]">
+          <div className="h-[16rem] max-md:h-[14rem] xl:h-[18rem]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={yoyComparison}
@@ -744,7 +744,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
     >
       <div className="grid gap-5 xl:grid-cols-[1.08fr_0.92fr]">
         <ChartCard compact className="flex h-full flex-col" title="Top 5 impulsionadores e detratores por rede" description="Impacto absoluto em receita vs. 2024.">
-          <div className="flex h-full min-h-[26rem] flex-col xl:min-h-0">
+          <div className="flex h-full min-h-[26rem] max-md:min-h-[19rem] flex-col xl:min-h-0">
             <div className="min-h-0 flex-1">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={driverHighlights} layout="vertical" margin={{ top: 6, right: 10, left: 20, bottom: 6 }} barCategoryGap={10}>
@@ -766,7 +766,7 @@ function YoYDriversSlide({ index, total }: { index: number; total: number }) {
         </ChartCard>
         <div className="grid gap-4 content-start">
           <ChartCard compact className="flex h-full flex-col" title="Top 5 categorias por impacto" description="Contribuição absoluta para o crescimento de receita.">
-            <div className="h-[14rem] xl:h-[15rem]">
+            <div className="h-[14rem] max-md:h-[12rem] xl:h-[15rem]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topCategoryImpact} layout="vertical" margin={{ top: 6, right: 10, left: 12, bottom: 6 }}>
                   <CartesianGrid horizontal={false} />
@@ -859,11 +859,11 @@ function YoYRecommendationsSlide({ index, total }: { index: number; total: numbe
       index={index}
       total={total}
     >
-      <div className="grid h-full auto-rows-fr gap-2.5 grid-cols-6">
+      <div className="grid auto-rows-auto gap-2.5 max-xl:grid-cols-1 xl:h-full xl:auto-rows-fr xl:grid-cols-6">
         {recommendationItems.map((item, i) => (
           <article
             key={item.title}
-            className={`panel flex h-full flex-col rounded-[1.25rem] border p-4 ${i < 2 ? 'col-span-3' : 'col-span-2'} ${recommendationStyles[item.accent].border} ${recommendationStyles[item.accent].wash}`}
+            className={`panel flex h-full flex-col rounded-[1.25rem] border p-4 max-xl:col-span-1 ${i < 2 ? 'xl:col-span-3' : 'xl:col-span-2'} ${recommendationStyles[item.accent].border} ${recommendationStyles[item.accent].wash}`}
           >
             <div className="m-auto flex w-full flex-col items-center gap-3">
               <div className={`font-display text-[2rem] font-bold leading-none tracking-[-0.05em] ${recommendationStyles[item.accent].step}`}>
@@ -972,7 +972,7 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
             </ResponsiveContainer>
           </div>
 
-          <div className="mt-3 grid grid-cols-4 gap-2.5">
+          <div className="mt-3 grid grid-cols-4 gap-2.5 max-md:grid-cols-2">
             {incentiveComposition.map((item) => (
               <div key={item.label} className="rounded-[0.9rem] border border-[var(--border)] bg-white/72 px-2.5 py-2.5 text-center">
                 <p className="font-display text-[0.98rem] font-semibold leading-none text-[var(--accent)]">
@@ -987,7 +987,7 @@ function RemunerationSlide({ index, total }: { index: number; total: number }) {
 
           <div className="mt-3 divide-y divide-[var(--border)] overflow-hidden rounded-[1.2rem] border border-[var(--border)] bg-white/56">
             {incentiveComposition.map((item) => (
-              <div key={item.label} className="grid grid-cols-[1fr_2fr] items-center gap-0 px-4 py-2.5">
+              <div key={item.label} className="grid grid-cols-[1fr_2fr] items-center gap-0 px-4 py-2.5 max-md:grid-cols-1 max-md:gap-2">
                 <div className="flex items-center gap-2.5">
                   <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: item.fill }} />
                   <p className="font-display text-[0.88rem] font-medium text-[var(--ink)]">{item.label}</p>
@@ -1047,8 +1047,8 @@ function ThankYouSlide({ index, total }: { index: number; total: number }) {
         </div>
 
         {/* Centro: Obrigado */}
-        <div className="flex flex-1 items-center justify-center">
-          <h1 className="font-display text-[4.5rem] font-semibold leading-none tracking-[-0.04em] text-[var(--ink)] sm:text-[5.5rem] lg:text-[6.5rem]">
+        <div className="flex flex-1 items-center justify-center py-6 max-sm:py-4">
+          <h1 className="font-display text-[4.5rem] font-semibold leading-none tracking-[-0.04em] text-[var(--ink)] max-sm:text-[2.85rem] sm:text-[5.5rem] lg:text-[6.5rem]">
             Obrigado.
           </h1>
         </div>

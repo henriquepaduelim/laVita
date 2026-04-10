@@ -20,12 +20,12 @@ export function SlideFrame({
   hideHeader = false,
 }: SlideFrameProps) {
   return (
-    <section className="deck-canvas relative flex h-full min-h-0 flex-col overflow-hidden px-4 py-3 sm:px-6 sm:py-4 lg:px-8 lg:py-5 xl:px-10 xl:py-5">
+    <section className="deck-canvas relative flex h-auto min-h-0 flex-col overflow-visible px-4 py-3 sm:px-6 sm:py-4 md:h-full md:overflow-hidden lg:px-8 lg:py-5 xl:px-10 xl:py-5">
       <p className="pointer-events-none absolute right-4 top-3 font-display text-[0.64rem] tabular-nums tracking-[0.1em] text-[var(--ink-soft)]/60 sm:right-6 sm:top-4 xl:right-10 xl:top-5">
         {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
       </p>
       {hideHeader ? (
-        <div className="min-h-0 flex-1 overflow-hidden">{children}</div>
+        <div className="min-h-0 flex-1 overflow-visible md:overflow-hidden">{children}</div>
       ) : (
         <>
           <div className="max-w-none pr-10 xl:pr-0">
@@ -41,7 +41,7 @@ export function SlideFrame({
               </p>
             </div>
           </div>
-          <div className="mt-3 min-h-0 flex-1 overflow-hidden">{children}</div>
+          <div className="mt-3 min-h-0 flex-1 overflow-visible md:overflow-hidden">{children}</div>
         </>
       )}
     </section>

@@ -36,7 +36,7 @@ export function MetricStrip({ items, columns = 4 }: MetricStripProps) {
           <div
             key={item.label}
             data-emphasis={item.emphasis ?? 'default'}
-            className={`metric-cell flex min-h-[8.85rem] flex-col justify-between px-3 py-3 sm:px-4 sm:py-4 ${resolveTone(item.emphasis)} ${
+            className={`metric-cell flex min-h-[8.85rem] flex-col justify-between px-3 py-3 max-md:min-h-[7.25rem] sm:px-4 sm:py-4 ${resolveTone(item.emphasis)} ${
               index > 0 ? 'border-t border-[var(--border)] xl:border-t-0 xl:border-l' : ''
             } border-[var(--border)]`}
           >

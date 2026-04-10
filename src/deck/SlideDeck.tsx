@@ -50,7 +50,7 @@ export function SlideDeck() {
   }, [activeIndex]);
 
   return (
-    <div className="executive-shell h-[100dvh] overflow-hidden">
+    <div className="executive-shell flex h-[100dvh] max-h-[100dvh] flex-col overflow-hidden">
       <a
         href="#deck-main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-[var(--brand)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
@@ -79,8 +79,11 @@ export function SlideDeck() {
         </button>
       </div>
 
-      {/* Main slide — fills full viewport */}
-      <main id="deck-main" className="h-full min-h-0">
+      {/* Main slide — scrolls on small screens; fixed viewport on md+ */}
+      <main
+        id="deck-main"
+        className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto max-md:overscroll-y-contain max-md:pb-[calc(7rem+env(safe-area-inset-bottom,0px))] md:h-full md:overflow-hidden md:pb-0"
+      >
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={activeSlide.id}
@@ -96,14 +99,14 @@ export function SlideDeck() {
               if (info.offset.x < -80 || info.velocity.x < -400) goToSlide(activeIndex + 1);
               if (info.offset.x > 80 || info.velocity.x > 400) goToSlide(activeIndex - 1);
             }}
-            className="h-full min-h-0"
+            className="w-full max-md:min-h-min md:h-full md:min-h-0"
           >
             <activeSlide.component index={activeIndex} total={deckSlides.length} />
           </motion.div>
         </AnimatePresence>
       </main>
 
-      <div className="no-print pointer-events-none absolute inset-x-0 bottom-3 z-30 px-4 md:hidden">
+      <div className="no-print pointer-events-none absolute inset-x-0 bottom-0 z-30 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pt-1 md:hidden">
         <div className="pointer-events-auto grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 rounded-[1.1rem] border border-[var(--border)] bg-white/78 px-3 py-2.5 shadow-[0_10px_24px_rgba(8,18,29,0.08)] backdrop-blur-sm">
           <button
             type="button"
@@ -130,7 +133,7 @@ export function SlideDeck() {
       </div>
 
       {/* Minimal dot navigation — bottom center */}
-      <div className="no-print pointer-events-none absolute inset-x-0 bottom-[4.65rem] z-30 flex justify-center md:bottom-3">
+      <div className="no-print pointer-events-none absolute inset-x-0 bottom-[calc(4.65rem+env(safe-area-inset-bottom,0px))] z-30 flex justify-center md:bottom-3 md:pb-0">
         <div className="pointer-events-auto flex items-center gap-[5px]">
           {deckSlides.map((slide, index) => {
             const active = index === activeIndex;
